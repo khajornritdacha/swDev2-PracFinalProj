@@ -16,6 +16,8 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
+        console.log("credentials", credentials);
+        console.log("req", req);
         if (!credentials) return null;
 
         const user = await userLogIn(credentials.email, credentials.password);

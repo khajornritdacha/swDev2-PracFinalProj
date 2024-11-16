@@ -1,42 +1,34 @@
 "use client";
 
+import userRegister from "@/libs/userRegister";
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
-export default function SignInForm({ csrfToken }: { csrfToken: string }) {
+// TODO: handle form validation
+export default function RegisterForm() {
+  const [name, setName] = useState("");
+  const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(email, password);
+    console.log(name, tel, email, password);
 
     try {
-      // TODO: add toaster to error
-      const res = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+      const res = await userRegister(name, tel, email, password);
+      //   TODO: add toaster for successfuly register
       console.log(res);
-      if (!res?.ok) {
-        setError(res?.error || "เข้าสู่ระบบไม่สำเร็จ");
-      }
-      const callback = searchParams.get("callbackUrl");
-      if (!callback) {
-        router.push("/reservation/manage");
-        return;
-      }
-      router.push(callback);
+      console.log("Successful");
+      setName("");
+      setTel("");
+      setEmail("");
+      setPassword("");
     } catch (err) {
       console.log(err);
-      setError("เข้าสู่ระบบไม่สำเร็จ");
+      setError("ลงทะเบียนไม่สำเร็จ");
     }
   };
 
@@ -53,12 +45,52 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
           className="mb-6 font-bold text-gray-800"
           style={{ fontSize: "24px" }}
         >
-          เข้าสู่ระบบ
+          ลงทะเบียน
         </Typography>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          <input name="csrfToken" type="hidden" value={csrfToken} />
+          {/* Name Input */}
+          <Box className="text-left">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-primary mb-1"
+              style={{ color: "#D32F2F" }}
+            >
+              ชื่อ-สกุล
+            </label>
+            <TextField
+              id="name"
+              type="name"
+              placeholder="ชื่อ นามสกุล"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              fullWidth
+              variant="outlined"
+              className="bg-gray-50"
+            />
+          </Box>
+
+          {/* Tel Input */}
+          <Box className="text-left">
+            <label
+              htmlFor="tel"
+              className="block text-sm font-medium text-primary mb-1"
+              style={{ color: "#D32F2F" }}
+            >
+              เบอร์โทร
+            </label>
+            <TextField
+              id="tel"
+              type="tel"
+              placeholder="0801112222"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              fullWidth
+              variant="outlined"
+              className="bg-gray-50"
+            />
+          </Box>
 
           {/* Email Input */}
           <Box className="text-left">
@@ -132,7 +164,7 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
               },
             }}
           >
-            เข้าสู่ระบบ
+            ลงทะเบียน
           </Button>
         </form>
 
@@ -142,13 +174,13 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
           className="mt-6"
           style={{ fontSize: "14px", color: "#757575" }}
         >
-          ผู้ใช้ใหม่?{" "}
+          ผู้ใช้เดิม?{" "}
           <Link
-            href="/auth/register"
+            href="/auth/signin"
             className="font-medium underline"
             style={{ color: "#D32F2F" }}
           >
-            ลงทะเบียน
+            เข้าสู่ระบบ
           </Link>
         </Typography>
       </Box>

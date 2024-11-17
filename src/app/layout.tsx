@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";

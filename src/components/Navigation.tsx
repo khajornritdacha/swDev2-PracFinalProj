@@ -6,7 +6,7 @@ import Hamburger from "./Hamburger";
 import SignoutButton from "./SignoutButton";
 import StyledButton from "./StyledButton";
 
-// TODO: create signout page
+// TODO: change href
 export default function Navigation() {
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user;

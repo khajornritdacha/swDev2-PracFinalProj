@@ -25,15 +25,14 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
         redirect: false,
       });
       console.log(res);
+
       if (!res?.ok) {
         setError(res?.error || "เข้าสู่ระบบไม่สำเร็จ");
       }
-      const callback = searchParams.get("callbackUrl");
-      if (!callback) {
-        router.push("/reservation/manage");
-        return;
-      }
-      router.push(callback);
+
+      const callbackUrl =
+        searchParams?.get("callbackUrl") || "/reservation/manage";
+      router.push(callbackUrl);
     } catch (err) {
       console.log(err);
       setError("เข้าสู่ระบบไม่สำเร็จ");

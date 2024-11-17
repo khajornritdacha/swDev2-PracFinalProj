@@ -1,13 +1,14 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
-import { getServerSession } from "next-auth";
+"use client";
+
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Hamburger from "./Hamburger";
 import SignoutButton from "./SignoutButton";
 import StyledButton from "./StyledButton";
-import Hamburger from "./Hamburger";
 
 // TODO: create signout page
-export default async function Navigation() {
-  const session = await getServerSession(authOptions);
+export default function Navigation() {
+  const { data: session } = useSession();
   const isLoggedIn = !!session?.user;
 
   return (

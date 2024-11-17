@@ -1,20 +1,15 @@
+import Navigation from "@/components/Navigation";
+import { Inter } from "@next/font/google";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+import "./globals.css";
 import NextAuthProvider from "./provider/NextAuthProvider";
-import Navigation from "@/components/Navigation";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter", // Define a custom CSS variable
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -31,9 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.variable} antialiased font-sans`}>
         <NextAuthProvider session={nextAuthSession}>
           <Navigation />
           {children}

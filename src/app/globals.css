@@ -23,7 +23,9 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* @apply font-sans; */
+  font-family: Inter, sans-serif;
+  /* font-family: monospace !important; */
 }
 
 @layer utilities {

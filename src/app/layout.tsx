@@ -1,20 +1,16 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/authOptions";
-import NextAuthProvider from "./provider/NextAuthProvider";
 import Navigation from "@/components/Navigation";
+import type { Metadata } from "next";
+import { getServerSession } from "next-auth";
+import { Prompt } from "next/font/google";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+import "./globals.css";
+import NextAuthProvider from "./provider/NextAuthProvider";
+import ThemeLayout from "./themelayout";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const prompt = Prompt({
+  subsets: ["latin", "thai"],
+  variable: "--font-prompt",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -31,13 +27,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextAuthProvider session={nextAuthSession}>
-          <Navigation />
-          {children}
-        </NextAuthProvider>
+      <body className={`${prompt.variable} antialiased `}>
+        <ThemeLayout>
+          <NextAuthProvider session={nextAuthSession}>
+            <Navigation />
+            {children}
+          </NextAuthProvider>
+        </ThemeLayout>
       </body>
     </html>
   );

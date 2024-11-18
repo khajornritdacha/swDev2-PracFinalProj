@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply font-prompt;
+  }
+}
+
+* {
+  @apply font-prompt;
+  font-family: inherit;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -23,7 +34,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply font-prompt;
 }
 
 @layer utilities {

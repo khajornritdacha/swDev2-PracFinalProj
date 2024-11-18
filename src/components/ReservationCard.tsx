@@ -5,11 +5,16 @@ import Calendar from "@/app/icons/Calendar.svg";
 import Person from "@/app/icons/Person.svg";
 import Clock from "@/app/icons/Clock.svg";
 import { GetReservationDto } from "@/interface";
+import { Role } from "@/next-auth";
 
 export default function ReservationCard({
   reservation,
+  role,
+  email,
 }: {
   reservation: GetReservationDto;
+  role: Role;
+  email: string;
 }) {
   const bookingDate = new Date(reservation.bookingDate).toLocaleDateString(
     "th-TH",
@@ -27,13 +32,21 @@ export default function ReservationCard({
     }
   );
 
+  const isAdmin = role === "admin";
+
   return (
     <div className="flex flex-col  items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer sm:flex-row">
       <div className="flex w-full">
         <div className="flex-col">
           <h3 className="text-xl font-bold">{reservation.restaurant.name}</h3>
-          <span className="font-light text-gray text-nowrap">
-            ชื่อผู้จอง: {reservation.user}
+          <span
+            className={`font-light text-gray text-nowrap ${
+              isAdmin && "text-sm"
+            }`}
+          >
+            {isAdmin
+              ? `ไอดีผู้จอง: ${reservation.user}`
+              : `อีเมลผู้จอง: ${email}`}
           </span>
         </div>
       </div>

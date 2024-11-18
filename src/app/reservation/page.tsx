@@ -4,15 +4,17 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 
 export default async function ReservationPage() {
   const session = await getServerSession(authOptions);
-  console.log(session);
-  console.log(session?.user);
   if (!session) return null;
   return (
     <div className="flex items-center flex-col">
       <h1 className="text-4xl sm:text-5xl font-bold text-center py-8 ">
         ประวัติการจอง
       </h1>
-      <ReservationCatalog token={session.user.token} />
+      <ReservationCatalog
+        token={session.user.token}
+        role={session.user.role}
+        email={session.user.email}
+      />
     </div>
   );
 }

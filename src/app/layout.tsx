@@ -5,7 +5,8 @@ import { Prompt } from "next/font/google";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import "./globals.css";
 import NextAuthProvider from "./provider/NextAuthProvider";
-import ThemeLayout from "./themelayout";
+import ThemeLayout from "./context/themelayout";
+import ReactQueryProvider from "./context/queryProvider";
 
 const prompt = Prompt({
   subsets: ["latin", "thai"],
@@ -29,10 +30,12 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${prompt.variable} antialiased `}>
         <ThemeLayout>
-          <NextAuthProvider session={nextAuthSession}>
-            <Navigation />
-            {children}
-          </NextAuthProvider>
+          <ReactQueryProvider>
+            <NextAuthProvider session={nextAuthSession}>
+              <Navigation />
+              {children}
+            </NextAuthProvider>
+          </ReactQueryProvider>
         </ThemeLayout>
       </body>
     </html>

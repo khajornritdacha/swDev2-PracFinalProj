@@ -4,18 +4,18 @@ import StyledButton from "./StyledButton";
 import Calendar from "@/app/icons/Calendar.svg";
 import Person from "@/app/icons/Person.svg";
 import Clock from "@/app/icons/Clock.svg";
-import { ReservationDto } from "@/interface";
+import { GetReservationDto } from "@/interface";
 
 export default function ReservationCard({
   reservation,
 }: {
-  reservation: ReservationDto;
+  reservation: GetReservationDto;
 }) {
   const bookingDate = new Date(reservation.bookingDate).toLocaleDateString(
     "th-TH",
     {
       year: "numeric",
-      month: "long",
+      month: "short",
       day: "numeric",
     }
   );
@@ -28,17 +28,17 @@ export default function ReservationCard({
   );
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer sm:flex-row">
+    <div className="flex flex-col  items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer sm:flex-row">
       <div className="flex w-full">
         <div className="flex-col">
-          <h3 className="text-xl font-bold">{reservation.restaurant}</h3>
-          <span className="font-light text-gray">
+          <h3 className="text-xl font-bold">{reservation.restaurant.name}</h3>
+          <span className="font-light text-gray text-nowrap">
             ชื่อผู้จอง: {reservation.user}
           </span>
         </div>
       </div>
       <div className="flex justify-between items-center px-3 gap-5 text-gray w-full">
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 min-w-max">
           <Image src={Calendar} alt="Calender" width={20} height={20} />
           <span className="">{bookingDate}</span>
         </div>

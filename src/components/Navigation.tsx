@@ -21,7 +21,7 @@ export default function Navigation() {
         <div className="hidden sm:inline-block">
           <ul className="flex justify-between items-center gap-14">
             <li>
-              <Link href="/reservation/manage">ร้านอาหารทั้งหมด</Link>
+              <Link href="/restaurant">ร้านอาหารทั้งหมด</Link>
             </li>
             <li>
               <Link href="/reservation/manage">การจองของฉัน</Link>

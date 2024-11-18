@@ -2,9 +2,13 @@
 
 import React from "react";
 import RestaurantPageClient from "../../../components/RestaurantPageClient"; // Import the Client Component
+import AdminBar from "@/components/AdminBar";
 
 const RestaurantPage = () => {
-  return <RestaurantPageClient />;
+  return (
+    <><AdminBar />
+  <RestaurantPageClient />
+  </>);
 };
 
 export default RestaurantPage;

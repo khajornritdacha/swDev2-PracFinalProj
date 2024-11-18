@@ -4,6 +4,7 @@ import RestaurantIcon from "../../../../../public/logo/restaurant.svg";
 import PinIcon from "../../../../../public/logo/pin.svg";
 import Link from 'next/link';
 import RestaurantDetail from '../../../../components/RestaurantDetail'; // Import the new component
+import AdminBar from '@/components/AdminBar';
 
 export default async function RestaurantDetailPage({ params }: { params: { rid: string } }) {
     
@@ -21,7 +22,7 @@ export default async function RestaurantDetailPage({ params }: { params: { rid: 
     return (
         <>
             <div className='h-full w-full flex flex-col items-center justify-center gap-16'>
-                {/* Render the RestaurantDetail component and pass the restaurant data */}
+            <AdminBar rid={params.rid} />
                 <RestaurantDetail restaurant={restaurant} />
             </div>
         </>

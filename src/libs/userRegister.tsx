@@ -7,7 +7,7 @@ export default async function userRegister(
   // TODO: change the URL to the actual API URL
   console.log(`URL: ${process.env.BACKEND_API_URL}`);
   //   const URL = `${process.env.BACKEND_API_URL}/auth/register`;
-  const URL = `http://localhost:5000/api/v1/auth/register`;
+  const URL = `http://localhost:5001/api/v1/auth/register`;
   const role = "user";
   const createdAt = new Date().toISOString();
   const rawRes = await fetch(URL, {

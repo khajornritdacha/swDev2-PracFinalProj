@@ -46,7 +46,7 @@ const RestaurantPageClient = () => {
 
   return (
     <main className="p-5">
-      <h1 className="text-xl font-medium text-center mb-6">Select Your Restaurant</h1>
+      <h1 className="text-xl font-medium text-center mb-6">Red Gourmet Kitchen</h1>
       
       {/* Pass the result count to SearchBarWithFilters */}
       <SearchBarWithFilters

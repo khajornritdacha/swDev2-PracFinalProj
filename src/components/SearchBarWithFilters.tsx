@@ -69,7 +69,12 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
       <div className="hidden md:block space-y-4">
         <div className="flex items-center space-x-4">
           {/* Search Bar */}
-          <div className="flex w-full px-4 py-3 items-center rounded-md border-2 border-blue-500 overflow-hidden max-w-md relative">
+          <div className="flex w-full px-4 py-3 items-center rounded-md border-2 border-[#EC0808] overflow-hidden relative">
+            <div className="pr-2 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
             <input
               type="text"
               placeholder="Search Something..."
@@ -81,7 +86,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
             />
             <button
               onClick={handleSearch}
-              className="text-white absolute right-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white absolute right-2.5 bg-[#EC0808] hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#EC0808] dark:hover:bg-red-700 dark:focus:ring-red-800"
             >
               Search
             </button>
@@ -94,7 +99,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
               name="cuisine"
               value={filters.cuisine}
               onChange={handleSelectChange}
-              className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+              className="w-full px-4 py-2 rounded-md border-2 border-red-500"
             >
               <option value="">All Cuisines</option>
               {cuisineOptions.map((option) => (
@@ -112,7 +117,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
               name="province"
               value={filters.province}
               onChange={handleSelectChange}
-              className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+              className="w-full px-4 py-2 rounded-md border-2 border-red-500"
             >
               <option value="">All Provinces</option>
               {provinceOptions.map((option) => (
@@ -134,7 +139,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
               name="sortOption"
               value={filters.sortOption}
               onChange={handleSelectChange}
-              className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+              className="w-full px-4 py-2 rounded-md border-2 border-red-500"
             >
               <option value="">Sort by Name</option>
               {sortOptions.map((option) => (
@@ -151,7 +156,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
       <div className="md:hidden">
         {/* Search Bar */}
         <div className="flex items-center space-x-4 mb-4">
-          <div className="flex w-full px-4 py-3 items-center rounded-md border-2 border-blue-500 overflow-hidden max-w-md relative">
+          <div className="flex w-full px-4 py-3 items-center rounded-md border-2 border-red-500 overflow-hidden relative">
             <input
               type="text"
               placeholder="Search Something..."
@@ -163,7 +168,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
             />
             <button
               onClick={handleSearch}
-              className="text-white absolute right-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white absolute right-2.5 bg-[#EC0808] hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-bg-[#EC0808] dark:hover:bg-red-700 dark:focus:ring-red-800"
             >
               Search
             </button>
@@ -175,7 +180,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
           <span className="text-sm">Number of Results: {resultsCount}</span>
           <button
             onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+            className="text-white bg-[#EC0808] hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5"
           >
             Filter
           </button>
@@ -193,7 +198,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
                   name="cuisine"
                   value={filters.cuisine}
                   onChange={handleSelectChange}
-                  className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+                  className="w-full px-4 py-2 rounded-md border-2 border-red-500"
                 >
                   <option value="">All Cuisines</option>
                   {cuisineOptions.map((option) => (
@@ -210,7 +215,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
                   name="province"
                   value={filters.province}
                   onChange={handleSelectChange}
-                  className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+                  className="w-full px-4 py-2 rounded-md border-2 border-red-500"
                 >
                   <option value="">All Provinces</option>
                   {provinceOptions.map((option) => (
@@ -227,7 +232,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
                   name="sortOption"
                   value={filters.sortOption}
                   onChange={handleSelectChange}
-                  className="w-full px-4 py-2 rounded-md border-2 border-blue-500"
+                  className="w-full px-4 py-2 rounded-md border-2 border-red-500"
                 >
                   <option value="">Sort by Name</option>
                   {sortOptions.map((option) => (

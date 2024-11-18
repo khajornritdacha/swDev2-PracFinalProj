@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import createIcon from "../../public/logo/Create.svg";
 import editIcon from "../../public/logo/Edit.svg";
 import Image from "next/image";
-import { Session } from "inspector/promises";
+import { useSession } from "next-auth/react";
 
 // Props type for admin status and restaurant ID
 interface AdminBarProps {
@@ -12,7 +13,8 @@ interface AdminBarProps {
 }
 
 const AdminBar: React.FC<AdminBarProps> = ({ rid }) => {
-  if (!Session.user.role) return null; // Hide the component if the user is not an admin
+  const { data: session } = useSession();
+  if (!session || !session.user.role) return null; // Hide the component if the user is not an admin
 
   return (
     <div className="flex w-full justify-center items-center opacity-70">

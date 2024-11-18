@@ -8,14 +8,13 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 
 export default async function ReservationPage() {
   const session = await getServerSession(authOptions);
-  console.log(session);
   if (!session) return null;
   const reservations: Promise<ReservationDto[]> = getReservations(
     session?.user.token
   );
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center py-8 font-sans">
+      <h1 className="text-4xl sm:text-5xl font-bold text-center py-8 ">
         ประวัติการจอง
       </h1>
       <Suspense

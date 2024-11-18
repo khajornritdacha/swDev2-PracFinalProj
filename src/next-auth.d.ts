@@ -6,8 +6,13 @@ declare module "next-auth" {
       _id: string;
       name: string;
       email: string;
-      role: string;
+      role: Role;
       token: string;
     };
   }
+}
+
+export enum Role {
+  Admin = "admin",
+  User = "user",
 }

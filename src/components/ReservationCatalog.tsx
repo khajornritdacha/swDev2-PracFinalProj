@@ -1,12 +1,21 @@
 "use client";
 
 import getReservations from "@/libs/getReservations";
+import { Role } from "@/next-auth";
+import { LinearProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import ReservationCard from "./ReservationCard";
-import { LinearProgress } from "@mui/material";
 
 // TODO: change to use real data
-export default function ReservationCatalog({ token }: { token: string }) {
+export default function ReservationCatalog({
+  token,
+  role,
+  email,
+}: {
+  token: string;
+  role: Role;
+  email: string;
+}) {
   console.log(`token: ${token}`);
   const { data, isLoading, isError } = useQuery({
     queryFn: async () => await getReservations(token),
@@ -46,7 +55,12 @@ export default function ReservationCatalog({ token }: { token: string }) {
   return (
     <>
       {reservations.map((reservation) => (
-        <ReservationCard key={`${reservation._id}`} reservation={reservation} />
+        <ReservationCard
+          key={`${reservation._id}`}
+          reservation={reservation}
+          role={role}
+          email={email}
+        />
       ))}
     </>
   );

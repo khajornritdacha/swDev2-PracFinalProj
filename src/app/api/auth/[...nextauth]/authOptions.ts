@@ -23,10 +23,12 @@ export const authOptions: AuthOptions = {
 
         const user = await userLogIn(credentials.email, credentials.password);
         const profile = await getUserProfile(user.token);
-        console.log(profile);
-        if (profile) {
+        if (user && profile) {
           // Any object returned will be saved in `user` property of the JWT
-          return profile;
+          return {
+            ...profile,
+            ...user,
+          };
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;

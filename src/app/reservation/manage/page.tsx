@@ -1,18 +1,20 @@
-"use client";
-import { useSession } from "next-auth/react";
+import ReservationCatalog from "@/components/ReservationCatalog";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-export default function MyReservationPage() {
-  const { data: session } = useSession();
-  console.log(session?.user.name);
-  console.log(session);
+export default async function ReservationPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) return null;
   return (
-    <>
-      <div>Hello my reservation</div>
-      {session ? (
-        <div>User: {session.user.name}</div>
-      ) : (
-        <div>Session is not active</div>
-      )}
-    </>
+    <div className="flex items-center flex-col">
+      <h1 className="text-4xl sm:text-5xl font-bold text-center py-8 ">
+        ประวัติการจอง
+      </h1>
+      <ReservationCatalog
+        token={session.user.token}
+        role={session.user.role}
+        email={session.user.email}
+      />
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import Person from "@/app/icons/Person.svg";
 import Clock from "@/app/icons/Clock.svg";
 import { GetReservationDto } from "@/interface";
 import { Role } from "@/next-auth";
+import Link from "next/link";
 
 export default function ReservationCard({
   reservation,
@@ -31,6 +32,9 @@ export default function ReservationCard({
       minute: "2-digit",
     }
   );
+
+  // TODO: open modal and confirm delete with react query mutate
+  const handleDelete = async (id: string) => {};
 
   const isAdmin = role === "admin";
 
@@ -65,8 +69,14 @@ export default function ReservationCard({
         </div>
       </div>
       <div className="flex items-center justify-around w-full">
-        <StyledButton variant="secondary">แก้ไขข้อมูล</StyledButton>
-        <StyledButton>ยกเลิกการจอง</StyledButton>
+        <StyledButton variant="secondary">
+          <Link href={`/reservation/manage/${reservation._id}`}>
+            แก้ไขข้อมูล
+          </Link>
+        </StyledButton>
+        <StyledButton handleOnClick={() => handleDelete(reservation._id)}>
+          ยกเลิกการจอง
+        </StyledButton>
       </div>
     </div>
   );

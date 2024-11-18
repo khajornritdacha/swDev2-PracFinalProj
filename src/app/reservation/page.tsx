@@ -13,7 +13,7 @@ export default async function ReservationPage() {
     session?.user.token
   );
   return (
-    <div>
+    <div className="flex items-center flex-col">
       <h1 className="text-4xl sm:text-5xl font-bold text-center py-8 ">
         ประวัติการจอง
       </h1>

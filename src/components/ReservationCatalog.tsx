@@ -32,7 +32,7 @@ export default async function ReservationCatalog({
     },
   ];
   return (
-    <div className="flex justify-center flex-col items-center rounded-3xl gap-6">
+    <div className="flex justify-center flex-col items-center rounded-3xl gap-6 min-w-full ">
       {reservations.map((reservation) => (
         <ReservationCard
           key={`${reservation.bookingDate}, ${reservation.user}`}

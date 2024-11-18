@@ -1,19 +1,19 @@
-import { ReservationDto } from "@/interface";
+import { GetReservationJson } from "@/interface";
+import axiosInstance from "./axios";
+import { AxiosResponse } from "axios";
 
 export default async function getReservations(
   token: string
-): Promise<ReservationDto[]> {
-  const URL = `${process.env.BACKEND_API_URL}/bookings`;
-  const response = await fetch(URL, {
-    method: "GET",
+): Promise<GetReservationJson> {
+  const path = `/bookings`;
+  const res = (await axiosInstance.get(path, {
     headers: {
       authorization: `Bearer ${token}`,
     },
-  });
+  })) as AxiosResponse<GetReservationJson>;
 
-  if (!response.ok) {
-    throw new Error("Failed to get reservations");
-  }
+  console.log(res.data);
+  console.log(res.data.data[0].restaurant);
 
-  return (await response.json()).data;
+  return res.data as GetReservationJson;
 }

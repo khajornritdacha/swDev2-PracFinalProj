@@ -1,3 +1,4 @@
+import getUserProfile from "@/libs/getUserProfile";
 import userLogIn from "@/libs/userLogIn";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -16,15 +17,18 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        console.log("credentials", credentials);
-        console.log("req", req);
+        // console.log("credentials", credentials);
+        // console.log("req", req);
         if (!credentials) return null;
 
         const user = await userLogIn(credentials.email, credentials.password);
-
-        if (user) {
+        const profile = await getUserProfile(user.token);
+        if (user && profile) {
           // Any object returned will be saved in `user` property of the JWT
-          return user;
+          return {
+            ...profile,
+            ...user,
+          };
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;

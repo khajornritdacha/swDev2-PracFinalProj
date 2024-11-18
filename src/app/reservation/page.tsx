@@ -15,6 +15,9 @@ export default async function ReservationPage() {
   );
   return (
     <div>
+      <h1 className="text-3xl font-bold text-center py-8 font-sans">
+        ประวัติการจอง
+      </h1>
       <Suspense
         fallback={
           <div>

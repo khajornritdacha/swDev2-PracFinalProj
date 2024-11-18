@@ -24,7 +24,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   /* @apply font-sans; */
-  font-family: Inter, sans-serif;
+  font-family: var(--font-inter);
   /* font-family: monospace !important; */
 }
 

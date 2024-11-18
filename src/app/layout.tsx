@@ -1,5 +1,5 @@
 import Navigation from "@/components/Navigation";
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
@@ -9,7 +9,14 @@ import NextAuthProvider from "./provider/NextAuthProvider";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter", // Define a custom CSS variable
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto", // Define a custom CSS variable
 });
 
 export const metadata: Metadata = {
@@ -26,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased font-sans`}>
+      <body className={`${inter.variable} ${roboto.variable} antialiased`}>
         <NextAuthProvider session={nextAuthSession}>
           <Navigation />
           {children}

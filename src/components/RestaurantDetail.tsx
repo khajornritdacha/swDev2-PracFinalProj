@@ -77,6 +77,7 @@ const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
                                 <div>{restaurant.foodtype}</div>
                             </div>
                             <div className='flex gap-2'>
+                            <span className="font-bold">Tel.</span>
                                 <div>{restaurant.tel}</div>
                             </div>
                         </div>

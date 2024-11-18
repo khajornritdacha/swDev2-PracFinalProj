@@ -1,14 +1,15 @@
 import Navigation from "@/components/Navigation";
-import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
+import { Prompt } from "next/font/google";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import "./globals.css";
 import NextAuthProvider from "./provider/NextAuthProvider";
+import ThemeLayout from "./themelayout";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter", // Define a custom CSS variable
+const prompt = Prompt({
+  subsets: ["latin", "thai"],
+  variable: "--font-prompt",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
@@ -26,11 +27,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased font-sans`}>
-        <NextAuthProvider session={nextAuthSession}>
-          <Navigation />
-          {children}
-        </NextAuthProvider>
+      <body className={`${prompt.variable} antialiased `}>
+        <ThemeLayout>
+          <NextAuthProvider session={nextAuthSession}>
+            <Navigation />
+            {children}
+          </NextAuthProvider>
+        </ThemeLayout>
       </body>
     </html>
   );

@@ -9,8 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)"],
-        mono: ["var(--font-roboto)"],
+        prompt: ["var(--font-prompt)", "sans-serif"],
       },
       colors: {
         background: "var(--background)",

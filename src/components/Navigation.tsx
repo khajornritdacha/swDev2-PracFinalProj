@@ -13,7 +13,7 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="flex justify-between w-full items-center px-8 py-3 shadow-md font-medium font-sans sm:px-20">
+      <div className="flex justify-between w-full items-center px-8 py-3 shadow-md font-medium sm:px-20">
         <div className="flex items-center">
           <Link href="/reservation/manage">ร้านอาหารทั้งหมด</Link>
         </div>

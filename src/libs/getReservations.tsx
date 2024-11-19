@@ -12,8 +12,5 @@ export default async function getReservations(
     },
   })) as AxiosResponse<GetReservationJson>;
 
-  console.log(res.data);
-  console.log(res.data.data[0].restaurant);
-
   return res.data as GetReservationJson;
 }

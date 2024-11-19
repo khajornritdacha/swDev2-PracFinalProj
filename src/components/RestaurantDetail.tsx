@@ -25,8 +25,6 @@ const isValidUrl = (url: string): boolean => {
 
 const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
   const isValidPicture = isValidUrl(restaurant.picture);
-  console.log(`url: ${restaurant.picture}, valid: ${isValidPicture}`);
-  console.log("Run RestaurantDetail");
   return (
     <>
       <div className="h-full w-full flex flex-col justify-center items-center gap-4">

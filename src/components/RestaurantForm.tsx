@@ -61,15 +61,10 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
       picture,
     };
 
-    console.log("Data");
-    console.log(initialData);
-
     try {
       const method = initialData ? "PUT" : "POST"; // Use PUT for editing, POST for creating
-      console.log(`Method: ${method}, Id: ${initialData?._id}`);
       const url =
         method === "PUT" && rid ? `restaurants/${rid}` : `restaurants`;
-      console.log(`Token: ${token}`);
       const res = await axiosInstance.request({
         url: url,
         method: method,
@@ -80,26 +75,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
         data: JSON.stringify(restaurantData),
       });
 
-      console.log(res.data);
-
-      // const response = await fetch(url, {
-      //   method: method,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(restaurantData),
-      // });
-
       onSubmit(restaurantData); // Call the onSubmit prop with the new data
-      // if (response.ok) {
-      //   alert(
-      //     initialData
-      //       ? "Restaurant updated successfully!"
-      //       : "Restaurant created successfully!"
-      //   );
-      // } else {
-      //   alert("Failed to submit restaurant.");
-      // }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred.");

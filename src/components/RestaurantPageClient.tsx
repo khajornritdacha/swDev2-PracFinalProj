@@ -7,7 +7,9 @@ import getSearchedRestaurants from "@/libs/getSearchedRestaurants";
 import { RestaurantJson, RestaurantItem } from "../../interface";
 
 const RestaurantPageClient = () => {
-  const [restaurantsJson, setRestaurantsJson] = useState<RestaurantJson | null>(null);
+  const [restaurantsJson, setRestaurantsJson] = useState<RestaurantJson | null>(
+    null
+  );
   const [filters, setFilters] = useState({
     searchQuery: "",
     cuisine: "",
@@ -22,8 +24,10 @@ const RestaurantPageClient = () => {
     const fetchRestaurants = async () => {
       setLoading(true);
       try {
-        const data = await getSearchedRestaurants({ ...filters, page: currentPage });
-        console.log(data, filters);
+        const data = await getSearchedRestaurants({
+          ...filters,
+          page: currentPage,
+        });
         setRestaurantsJson(data);
         setTotalPages(data.pagination.totalPages);
       } catch (error) {
@@ -32,10 +36,10 @@ const RestaurantPageClient = () => {
         setLoading(false);
       }
     };
-  
+
     fetchRestaurants();
-  }, [filters, currentPage]);  // Trigger fetch on filters or currentPage change
-  
+  }, [filters, currentPage]); // Trigger fetch on filters or currentPage change
+
   const handleFilterChange = (newFilters: any) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -46,19 +50,23 @@ const RestaurantPageClient = () => {
 
   return (
     <main className="p-5">
-      <h1 className="text-xl font-medium text-center mb-6">Red Gourmet Kitchen</h1>
-      
+      <h1 className="text-xl font-medium text-center mb-6">
+        Red Gourmet Kitchen
+      </h1>
+
       {/* Pass the result count to SearchBarWithFilters */}
       <SearchBarWithFilters
         filters={filters}
         onFilterChange={handleFilterChange}
-        resultsCount={restaurantsJson?.data?.length || 0} 
+        resultsCount={restaurantsJson?.data?.length || 0}
       />
 
       {loading ? (
         <p>Loading...</p>
       ) : (
-        restaurantsJson?.data && <RestaurantList restaurantsJson={restaurantsJson.data} />
+        restaurantsJson?.data && (
+          <RestaurantList restaurantsJson={restaurantsJson.data} />
+        )
       )}
 
       <div className="flex justify-between items-center mt-4">
@@ -73,7 +81,9 @@ const RestaurantPageClient = () => {
           Page {currentPage} of {totalPages || 1}
         </span>
         <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
           className="px-4 py-2 bg-gray-300 rounded-md"
         >

@@ -9,7 +9,6 @@ export default async function userRegister(
   const URL = "/auth/register";
   const role = "user";
   const createdAt = new Date().toISOString();
-  console.log(name, tel, email, password, role, createdAt);
   const res = await axiosInstance.post(
     URL,
     {
@@ -26,9 +25,6 @@ export default async function userRegister(
       },
     }
   );
-
-  console.log(res.status);
-  console.log(res.data);
 
   return res.data;
 }

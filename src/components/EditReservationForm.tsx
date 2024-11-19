@@ -6,6 +6,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import ReservationForm from "./ReservationForm";
+import { GetReservationDto } from "@/interface";
 
 export default function EditReservationForm({
   reservationId,
@@ -15,7 +16,11 @@ export default function EditReservationForm({
   const { data: session } = useSession();
   const [numOfGuests, setNumOfGuests] = useState<number>(0);
   const [bookingDate, setBookingDate] = useState<Dayjs | null>(null);
-  let createdAt = "";
+  const [reservation, setReservation] = useState<GetReservationDto | null>(
+    null
+  );
+
+  const isAdmin = session?.user.role === "admin";
   // TODO: handle loading
   const {} = useQuery({
     queryKey: ["reservation", "manage", reservationId],
@@ -25,7 +30,7 @@ export default function EditReservationForm({
       setNumOfGuests(res.data.numOfGuests);
       const day = dayjs(res.data.bookingDate);
       setBookingDate(day);
-      createdAt = res.data.createdAt;
+      setReservation(res.data);
       return res;
     },
   });
@@ -34,21 +39,25 @@ export default function EditReservationForm({
     mutationFn: async () => {
       if (!session?.user.token) return;
       if (!bookingDate) return;
+      if (!reservation) return;
       const res = await editReservation(
         {
           numOfGuests,
           bookingDate: bookingDate.toISOString(),
-          createdAt,
+          createdAt: reservation.createdAt,
         },
         session?.user.token,
         reservationId
       );
+      setReservation(res.data);
       return res;
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      // TODO: toast success
+    },
   });
 
-  const email = session?.user.email || "";
+  const email = (isAdmin ? reservation?.user : session?.user.email) || "";
 
   return (
     <ReservationForm
@@ -58,6 +67,7 @@ export default function EditReservationForm({
       bookingDate={bookingDate}
       setBookingDate={setBookingDate}
       handleOnSubmit={() => editMutation.mutate()}
+      isAdmin={isAdmin}
     />
   );
 }

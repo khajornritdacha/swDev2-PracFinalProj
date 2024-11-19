@@ -45,6 +45,24 @@ export async function deleteReservation(
   return res.data;
 }
 
+export async function editReservation(
+  editReservationDto: CreateReservationDto,
+  token: string,
+  reservation_id: string
+) {
+  const res = (await axiosInstance.put(
+    `/bookings/${reservation_id}`,
+    editReservationDto,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+  )) as AxiosResponse<{ data: GetReservationDto } & StatusResponse>;
+
+  return res.data;
+}
+
 export async function createReservation(
   createReservationDto: CreateReservationDto,
   token: string,

@@ -1,8 +1,7 @@
 import Image from "next/image";
-import RestaurantIcon from "../../public/logo/restaurant.svg";
-import PinIcon from "../../public/logo/pin.svg";
-import { Button } from "@mui/material";
 import Link from "next/link";
+import PinIcon from "../../public/logo/pin.svg";
+import RestaurantIcon from "../../public/logo/restaurant.svg";
 
 type RestaurantProps = {
   restaurant: {
@@ -15,6 +14,7 @@ type RestaurantProps = {
     tel: string;
     picture: string;
   };
+  hideBookingButton?: boolean;
 };
 
 const isValidUrl = (url: string): boolean => {
@@ -26,7 +26,10 @@ const isValidUrl = (url: string): boolean => {
   }
 };
 
-const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
+const RestaurantDetail = ({
+  restaurant,
+  hideBookingButton,
+}: RestaurantProps) => {
   const isValidPicture = isValidUrl(restaurant.picture);
   return (
     <>
@@ -107,33 +110,34 @@ const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
             </div>
           </div>
         </div>
-
-        {/* Book Button */}
-        <div
-          className="h-[15%] w-[70%]
+        {!hideBookingButton && (
+          <div
+            className="h-[15%] w-[70%]
                         bg-white rounded-[16px] p-4 shadow-lg
                         flex flex-col items-center justify-center gap-3 m-5"
-        >
-          <div className="text-[24px] font-bold">Click to Book</div>
-          <div className="h-auto w-full flex justify-center">
-            <hr
-              style={{
-                all: "unset",
-                width: "80%",
-                height: "2px",
-                backgroundColor: "#999999",
-                borderRadius: "8px",
-                opacity: "50%",
-              }}
-            />
-          </div>
-          <Link
-            href={`/reservation/create/${restaurant._id}`}
-            className="w-[50%] h-[60px] bg-[#EC0808] rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center"
           >
-            BOOK NOW
-          </Link>
-        </div>
+            <div className="text-[24px] font-bold">Click to Book</div>
+            <div className="h-auto w-full flex justify-center">
+              <hr
+                style={{
+                  all: "unset",
+                  width: "80%",
+                  height: "2px",
+                  backgroundColor: "#999999",
+                  borderRadius: "8px",
+                  opacity: "50%",
+                }}
+              />
+            </div>
+
+            <Link
+              href={`/reservation/create/${restaurant._id}`}
+              className="w-[50%] h-[60px] bg-[#EC0808] rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center"
+            >
+              BOOK NOW
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

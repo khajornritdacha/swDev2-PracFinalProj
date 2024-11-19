@@ -16,7 +16,6 @@ interface ReservationFormProps {
   isAdmin: boolean;
 }
 
-// TODO: change if admin
 export default function ReservationForm({
   email,
   numOfGuests,

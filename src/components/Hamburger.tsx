@@ -53,7 +53,7 @@ export default function Hamburger({ isLoggedIn }: { isLoggedIn: boolean }) {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <Link href="/reservation/manage">ร้านอาหารทั้งหมด</Link>
+          <Link href="/restaurant">ร้านอาหารทั้งหมด</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link href="/reservation/manage">การจองของฉัน</Link>

@@ -6,7 +6,6 @@ import { LinearProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import ReservationCard from "./ReservationCard";
 
-// TODO: change to use real data
 export default function ReservationCatalog({
   token,
   role,
@@ -16,7 +15,7 @@ export default function ReservationCatalog({
   role: Role;
   email: string;
 }) {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryFn: async () => await getReservations(token),
     queryKey: ["getReservations"],
   });
@@ -25,6 +24,7 @@ export default function ReservationCatalog({
 
   const reservations = data?.data || [];
 
+  // TODO: remove comments
   // const reservations = await reservationDto
   // const reservations = [
   //   {
@@ -58,6 +58,7 @@ export default function ReservationCatalog({
           reservation={reservation}
           role={role}
           email={email}
+          refetch={refetch}
         />
       ))}
     </>

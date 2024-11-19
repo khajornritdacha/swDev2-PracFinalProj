@@ -6,7 +6,7 @@ import Link from "next/link";
 
 type RestaurantProps = {
   restaurant: {
-    _id: string;
+    _id?: string;
     name: string;
     foodtype: string;
     address: string;
@@ -81,7 +81,7 @@ const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
 
           <div
             className="w-full max-w-[540px] min-w-[300px] aspect-[534/330]
-                                bg-white rounded-[16px] p-4 drop-shadow-md
+                                bg-white rounded-[16px] p-4 shadow-md
                                 flex flex-col items-center justify-center gap-8"
           >
             <div className="w-auto h-auto px-4 py-1 border-b-4 border-[#EC0808] flex items-center justify-center">
@@ -111,7 +111,7 @@ const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
         {/* Book Button */}
         <div
           className="h-[15%] w-[70%]
-                        bg-white rounded-[16px] p-4 drop-shadow-lg
+                        bg-white rounded-[16px] p-4 shadow-lg
                         flex flex-col items-center justify-center gap-3 m-5"
         >
           <div className="text-[24px] font-bold">Click to Book</div>

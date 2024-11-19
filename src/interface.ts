@@ -3,6 +3,10 @@ export interface DeleteResponse {
   success: boolean;
 }
 
+export interface StatusResponse {
+  success: boolean;
+}
+
 export interface GetRestaurantDto {
   _id: string;
   address: string;
@@ -34,4 +38,10 @@ export interface GetReservationJson {
   success: boolean;
   count: number;
   data: GetReservationDto[];
+}
+
+export interface CreateReservationDto {
+  bookingDate: string;
+  numOfGuests: number;
+  createdAt: string;
 }

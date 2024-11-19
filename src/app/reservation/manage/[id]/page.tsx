@@ -1,3 +1,5 @@
+import EditReservationForm from "@/components/EditReservationForm";
+
 export default function EditReservationPage({
   params,
 }: {
@@ -5,8 +7,8 @@ export default function EditReservationPage({
 }) {
   // TODO: handle fetch data and update data and toast on success
   return (
-    <>
-      <div>Hello edit reservation on {params.id}</div>
-    </>
+    <div className="flex flex-col sm:flex-row-reverse">
+      <EditReservationForm />
+    </div>
   );
 }

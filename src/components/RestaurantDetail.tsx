@@ -1,9 +1,12 @@
 import Image from "next/image";
 import RestaurantIcon from "../../public/logo/restaurant.svg";
 import PinIcon from "../../public/logo/pin.svg";
+import { Button } from "@mui/material";
+import Link from "next/link";
 
 type RestaurantProps = {
   restaurant: {
+    _id: string;
     name: string;
     foodtype: string;
     address: string;
@@ -124,9 +127,12 @@ const RestaurantDetail = ({ restaurant }: RestaurantProps) => {
               }}
             />
           </div>
-          <div className="w-[50%] h-[60px] bg-[#EC0808] rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center">
+          <Link
+            href={`/reservation/create/${restaurant._id}`}
+            className="w-[50%] h-[60px] bg-[#EC0808] rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center"
+          >
             BOOK NOW
-          </div>
+          </Link>
         </div>
       </div>
     </>

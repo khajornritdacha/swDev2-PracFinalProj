@@ -1,4 +1,9 @@
-import { DeleteResponse, GetReservationJson } from "@/interface";
+import {
+  CreateReservationDto,
+  DeleteResponse,
+  GetReservationJson,
+  StatusResponse,
+} from "@/interface";
 import axiosInstance from "./axios";
 import { AxiosResponse } from "axios";
 
@@ -23,7 +28,25 @@ export async function deleteReservation(
     headers: {
       authorization: `Bearer ${token}`,
     },
-  })) as AxiosResponse<DeleteResponse>;
+  })) as AxiosResponse<StatusResponse>;
+
+  return res.data;
+}
+
+export async function createReservation(
+  createReservationDto: CreateReservationDto,
+  token: string,
+  restaurant_id: string
+) {
+  const res = (await axiosInstance.post(
+    `/restaurants/${restaurant_id}/bookings`,
+    createReservationDto,
+    {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+  )) as AxiosResponse<{ data: CreateReservationDto } & StatusResponse>;
 
   return res.data;
 }

@@ -13,7 +13,6 @@ export default async function RestaurantDetailPage({
 }) {
   // Fetch the restaurant data
   const RestaurantDetailData = await getRestaurant(params.rid);
-  console.log("Restaurant Detail:", RestaurantDetailData);
 
   // If RestaurantDetail is null or undefined, show error or fallback
   const restaurant = RestaurantDetailData?.data;

@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
   const rid = params.rid; // Get the restaurant ID from dynamic routing
   const session = useSession();
-  console.log(session.data);
 
   const [restaurant, setRestaurant] = useState({
     _id: "",
@@ -23,9 +22,6 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  console.log("Restaurant type");
-  console.log(restaurant);
-
   // Fetch restaurant data when component mounts or when rid changes
   useEffect(() => {
     const fetchRestaurantData = async () => {
@@ -38,8 +34,6 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
       try {
         const restaurantDetailData = await getRestaurant(rid);
         const restaurantData = restaurantDetailData?.data;
-        console.log("Fetched data");
-        console.log(restaurantData);
 
         if (restaurantData) {
           setRestaurant(restaurantData); // Set fetched restaurant data

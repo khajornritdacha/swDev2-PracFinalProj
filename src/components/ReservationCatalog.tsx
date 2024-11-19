@@ -16,7 +16,6 @@ export default function ReservationCatalog({
   role: Role;
   email: string;
 }) {
-  console.log(`token: ${token}`);
   const { data, isLoading, isError } = useQuery({
     queryFn: async () => await getReservations(token),
     queryKey: ["getReservations"],
@@ -51,7 +50,6 @@ export default function ReservationCatalog({
   //   },
   // ];
 
-  console.log(reservations);
   return (
     <>
       {reservations.map((reservation) => (

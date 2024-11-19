@@ -15,19 +15,14 @@ export default function RegisterForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(name, tel, email, password);
-
     try {
       const res = await userRegister(name, tel, email, password);
       //   TODO: add toaster for successfuly register
-      console.log(res);
-      console.log("Successful");
       setName("");
       setTel("");
       setEmail("");
       setPassword("");
     } catch (err) {
-      console.log(err);
       setError("ลงทะเบียนไม่สำเร็จ");
     }
   };

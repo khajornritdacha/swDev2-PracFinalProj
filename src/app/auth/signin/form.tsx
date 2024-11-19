@@ -15,8 +15,6 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(email, password);
-
     try {
       // TODO: add toaster to error
       const res = await signIn("credentials", {
@@ -24,7 +22,6 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
         password,
         redirect: false,
       });
-      console.log(res);
 
       if (!res?.ok) {
         setError(res?.error || "เข้าสู่ระบบไม่สำเร็จ");
@@ -34,7 +31,6 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
         searchParams?.get("callbackUrl") || "/reservation/manage";
       router.push(callbackUrl);
     } catch (err) {
-      console.log(err);
       setError("เข้าสู่ระบบไม่สำเร็จ");
     }
   };

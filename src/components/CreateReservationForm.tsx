@@ -49,6 +49,7 @@ export default function CreateReservationForm({
       bookingDate={bookingDate}
       setBookingDate={setBookingDate}
       handleOnSubmit={() => createMutation.mutate()}
+      isAdmin={false}
     />
   );
 

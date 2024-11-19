@@ -13,9 +13,9 @@ interface ReservationFormProps {
   bookingDate: dayjs.Dayjs | null;
   setBookingDate: (bookingDate: dayjs.Dayjs | null) => void;
   handleOnSubmit: () => void;
+  isAdmin: boolean;
 }
 
-// TODO: change if admin
 export default function ReservationForm({
   email,
   numOfGuests,
@@ -23,16 +23,17 @@ export default function ReservationForm({
   bookingDate,
   setBookingDate,
   handleOnSubmit,
+  isAdmin,
 }: ReservationFormProps) {
   return (
     <FormControl className="flex flex-col gap-6 w-full">
       <div className="flex justify-between">
         <label className="block" htmlFor="email">
-          อีเมลผู้จอง
+          {isAdmin ? "ไอดีผู้จอง" : "อีเมลผู้จอง"}
         </label>
         <TextField
           id="email"
-          label="email"
+          label={isAdmin ? "user_id" : "email"}
           variant="outlined"
           placeholder="john@email.com"
           type="email"

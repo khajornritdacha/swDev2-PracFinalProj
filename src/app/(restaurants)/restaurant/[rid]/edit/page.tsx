@@ -1,31 +1,36 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import RestaurantForm from '../../../../../components/RestaurantForm';
-import getRestaurant from '@/libs/getRestaurant';
-import { useRouter } from 'next/navigation';
-import RestaurantDetail from '@/components/RestaurantDetail';
+import RestaurantDetail from "@/components/RestaurantDetail";
+import RestaurantForm from "@/components/RestaurantForm";
+import getRestaurant from "@/libs/getRestaurant";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
-  const router = useRouter();
   const rid = params.rid; // Get the restaurant ID from dynamic routing
+  const session = useSession();
+  console.log(session.data);
 
   const [restaurant, setRestaurant] = useState({
-    name: '',
-    foodtype: '',
-    address: '',
-    province: '',
-    postalcode: '',
-    tel: '',
-    picture: '',
+    _id: "",
+    name: "",
+    foodtype: "",
+    address: "",
+    province: "",
+    postalcode: "",
+    tel: "",
+    picture: "",
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  console.log("Restaurant type");
+  console.log(restaurant);
 
   // Fetch restaurant data when component mounts or when rid changes
   useEffect(() => {
     const fetchRestaurantData = async () => {
       if (!rid) {
-        setError('Invalid restaurant ID');
+        setError("Invalid restaurant ID");
         setLoading(false);
         return;
       }
@@ -33,14 +38,16 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
       try {
         const restaurantDetailData = await getRestaurant(rid);
         const restaurantData = restaurantDetailData?.data;
+        console.log("Fetched data");
+        console.log(restaurantData);
 
         if (restaurantData) {
           setRestaurant(restaurantData); // Set fetched restaurant data
         } else {
-          setError('Restaurant not found!'); // Handle case when no restaurant data is found
+          setError("Restaurant not found!"); // Handle case when no restaurant data is found
         }
       } catch (err) {
-        setError('Error fetching restaurant data'); // Handle error during fetch
+        setError("Error fetching restaurant data"); // Handle error during fetch
       } finally {
         setLoading(false);
       }
@@ -66,13 +73,19 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
               Edit
             </div>
           </div>
-          <RestaurantForm onSubmit={handleFormSubmit} initialData={restaurant} />
+          <RestaurantForm
+            onSubmit={handleFormSubmit}
+            initialData={restaurant}
+            rid={rid}
+            token={session?.data?.user?.token || ""}
+          />
         </div>
-        <div className='gap-8 py-4 items-center flex flex-col'>
-            <div className="h-auto text-[20px] font-extrabold text-[#999999]">
-                    Detail Page
-            </div>
-            <RestaurantDetail restaurant={restaurant} /> {/* Pass restaurant data as prop */}
+        <div className="gap-8 py-4 items-center flex flex-col">
+          <div className="h-auto text-[20px] font-extrabold text-[#999999]">
+            Detail Page
+          </div>
+          <RestaurantDetail restaurant={restaurant} />{" "}
+          {/* Pass restaurant data as prop */}
         </div>
       </div>
     </>

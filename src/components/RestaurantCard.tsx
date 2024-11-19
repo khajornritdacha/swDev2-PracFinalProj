@@ -1,62 +1,78 @@
 import { RestaurantItem } from "../../interface";
 import Link from "next/link";
-import Image from "next/image";  
-import MapIcon from "../../public/logo/map.svg"                                
+import Image from "next/image";
+import MapIcon from "../../public/logo/map.svg";
 
 interface CardProps {
   restaurant: RestaurantItem;
 }
 
-const RestaurantCard = ({ restaurant }: CardProps) => {
-    const { _id, name, picture, address, foodtype, province, tel } = restaurant;
+const isValidUrl = (url: string): boolean => {
+  try {
+    new URL(url); // Throws an error if the URL is invalid
+    return true;
+  } catch {
+    return false;
+  }
+};
 
-  return (<>
-    <div className="w-full h-[177px] shadow-custom-md rounded-[15px] flex justify-center gap-8 p-6">
+const RestaurantCard = ({ restaurant }: CardProps) => {
+  const { _id, name, picture, address, foodtype, province, tel } = restaurant;
+
+  const isValidPicture = isValidUrl(picture);
+
+  return (
+    <>
+      <div className="w-full h-[177px] shadow-custom-md rounded-[15px] flex justify-center gap-8 p-6">
         {/* Left Section */}
         <div className="h-full aspect-square relative">
+          {isValidPicture ? (
             <Image
-            src={picture}
-            alt={picture}
-            fill={true}
-            className="w-full h-full rounded-[6px] shadow-inner object-cover"
+              src={picture}
+              alt={picture}
+              fill={true}
+              className="w-full h-full rounded-[6px] shadow-inner object-cover"
             />
+          ) : null}
         </div>
 
         {/* Right Section */}
         <div className="w-full h-full flex-1 flex flex-col items-start justify-cente relative">
-        {/* upper Section */}
-            <div className="flex flex-col items-start justify-center">
-                <p className="text-[16px] font-light text-gray-700">{foodtype}</p>
-                <p className="text-[24px] font-semibold leading-[150%] text-gray-900">{name}</p>
-            </div>
+          {/* upper Section */}
+          <div className="flex flex-col items-start justify-center">
+            <p className="text-[16px] font-light text-gray-700">{foodtype}</p>
+            <p className="text-[24px] font-semibold leading-[150%] text-gray-900">
+              {name}
+            </p>
+          </div>
 
-            {/* below Section */}
-            <div className="flex-1 h-[35px] flex items-center justify-center gap-6 py-3 overflow-hidden">
-                <div className="flex items-center gap-2">
-                <div className="w-5 h-5 relative">
-                    <Image
-                        src={MapIcon}
-                        alt="map icon"
-                        fill={true}
-                        className="object-contain"
-                    />
-                </div>
-                <p className="text-[16px] font-regular text-gray-700">{province}</p>
-                </div>
+          {/* below Section */}
+          <div className="flex-1 h-[35px] flex items-center justify-center gap-6 py-3 overflow-hidden">
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 relative">
+                <Image
+                  src={MapIcon}
+                  alt="map icon"
+                  fill={true}
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-[16px] font-regular text-gray-700">
+                {province}
+              </p>
             </div>
+          </div>
 
-            {/* Detail Button */}
-            <Link
-            key={_id}
-            href={`/restaurant/${_id}`}
-            >
+          {/* Detail Button */}
+          <Link key={_id} href={`/restaurant/${_id}`}>
             <button className="w-[108px] p-[5px] flex items-center justify-center bg-[#EC0808] text-white text-[16px] font-extrabold rounded-full">
-                Details
+              Details
             </button>
-            </Link>
+          </Link>
         </div>
-    </div>
-  </>);
+      </div>
+    </>
+  );
 };
 
 export default RestaurantCard;

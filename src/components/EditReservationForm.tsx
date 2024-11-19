@@ -1,11 +1,11 @@
 "use client";
 
+import { editReservation, getOneReservation } from "@/libs/reservation.service";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import dayjs, { Dayjs } from "dayjs";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import ReservationForm from "./ReservationForm";
-import { useQuery } from "@tanstack/react-query";
-import { getOneReservation } from "@/libs/reservation.service";
-import { useSession } from "next-auth/react";
 
 export default function EditReservationForm({
   reservationId,
@@ -15,7 +15,7 @@ export default function EditReservationForm({
   const { data: session } = useSession();
   const [numOfGuests, setNumOfGuests] = useState<number>(0);
   const [bookingDate, setBookingDate] = useState<Dayjs | null>(null);
-
+  let createdAt = "";
   // TODO: handle loading
   const {} = useQuery({
     queryKey: ["reservation", "manage", reservationId],
@@ -25,16 +25,30 @@ export default function EditReservationForm({
       setNumOfGuests(res.data.numOfGuests);
       const day = dayjs(res.data.bookingDate);
       setBookingDate(day);
+      createdAt = res.data.createdAt;
       return res;
     },
   });
 
-  const email = "";
-  const handleOnSubmit = async () => {
-    console.log("Submit");
-    console.log("numOfGuests: ", numOfGuests);
-    console.log("bookingDate: ", bookingDate);
-  };
+  const editMutation = useMutation({
+    mutationFn: async () => {
+      if (!session?.user.token) return;
+      if (!bookingDate) return;
+      const res = await editReservation(
+        {
+          numOfGuests,
+          bookingDate: bookingDate.toISOString(),
+          createdAt,
+        },
+        session?.user.token,
+        reservationId
+      );
+      return res;
+    },
+    onSuccess: () => {},
+  });
+
+  const email = session?.user.email || "";
 
   return (
     <ReservationForm
@@ -43,9 +57,7 @@ export default function EditReservationForm({
       setNumOfGuests={setNumOfGuests}
       bookingDate={bookingDate}
       setBookingDate={setBookingDate}
-      handleOnSubmit={handleOnSubmit}
+      handleOnSubmit={() => editMutation.mutate()}
     />
   );
-
-  //   print("Hello Jo Jo, I am mind eieiei ");
 }

@@ -3,7 +3,7 @@ import getRestaurant from "@/libs/getRestaurant";
 import RestaurantIcon from "../../../../../public/logo/restaurant.svg";
 import PinIcon from "../../../../../public/logo/pin.svg";
 import Link from "next/link";
-import RestaurantDetail from "../../../../components/RestaurantDetail"; // Import the new component
+import RestaurantDetail from "@/components/RestaurantDetail"; // Import the new component
 import AdminBar from "@/components/AdminBar";
 
 export default async function RestaurantDetailPage({

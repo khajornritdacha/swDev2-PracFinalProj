@@ -15,6 +15,17 @@ export interface GetReservationDto {
   createdAt: string;
 }
 
+export interface RestaurantDto {
+  _id: string;
+  address: string;
+  name: string;
+  tel: string;
+  postalcode: string;
+  province: string;
+  foodtype: string;
+  picture: string;
+}
+
 export interface GetReservationJson {
   success: boolean;
   count: number;

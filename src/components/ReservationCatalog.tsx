@@ -1,10 +1,10 @@
 "use client";
 
-import getReservations from "@/libs/getReservations";
 import { Role } from "@/next-auth";
 import { LinearProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import ReservationCard from "./ReservationCard";
+import { getReservations } from "@/libs/reservation.service";
 
 export default function ReservationCatalog({
   token,

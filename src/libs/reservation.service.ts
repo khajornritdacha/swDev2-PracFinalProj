@@ -1,6 +1,7 @@
 import {
   CreateReservationDto,
   DeleteResponse,
+  GetReservationDto,
   GetReservationJson,
   StatusResponse,
 } from "@/interface";
@@ -18,6 +19,17 @@ export async function getReservations(
   })) as AxiosResponse<GetReservationJson>;
 
   return res.data as GetReservationJson;
+}
+
+export async function getOneReservation(reservation_id: string, token: string) {
+  const path = `/bookings/${reservation_id}`;
+  const res = (await axiosInstance.get(path, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  })) as AxiosResponse<{ data: GetReservationDto } & StatusResponse>;
+
+  return res.data;
 }
 
 export async function deleteReservation(

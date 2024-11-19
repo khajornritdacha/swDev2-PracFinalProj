@@ -8,7 +8,7 @@ export default function EditReservationPage({
   // TODO: handle fetch data and update data and toast on success
   return (
     <div className="flex flex-col sm:flex-row-reverse">
-      <EditReservationForm />
+      <EditReservationForm reservationId={params.id} />
     </div>
   );
 }

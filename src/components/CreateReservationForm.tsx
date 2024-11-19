@@ -21,7 +21,6 @@ export default function CreateReservationForm({
     mutationFn: async () => {
       // TODO: handle error
       //   TODO: toaster for success
-      console.log("In mutation");
       if (!session?.user.token) return;
       if (!bookingDate) return;
       const createdAt = new Date();
@@ -34,6 +33,7 @@ export default function CreateReservationForm({
         session?.user.token,
         restaurant_id
       );
+      return res;
     },
     onSuccess: () => {
       setNumOfGuests(0);

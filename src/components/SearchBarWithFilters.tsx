@@ -17,11 +17,12 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
   onFilterChange,
   resultsCount,
 }) => {
+  const [tempSearchQuery, setTempSearchQuery] = useState(filters.searchQuery);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const filterRef = useRef<HTMLDivElement | null>(null);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    onFilterChange({ [name]: value });
+    const { value } = e.target;
+    setTempSearchQuery(value);
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,19 +31,12 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
   };
 
   const handleSearch = () => {
-    // You can add the logic to trigger the search with the filters here.
-    onFilterChange(filters);
+    onFilterChange({ ...filters, searchQuery: tempSearchQuery });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSearch();
-    }
-  };
-
-  const handleClickOutside = (e: MouseEvent) => {
-    if (filterRef.current && !filterRef.current.contains(e.target as Node)) {
-      setIsMobileFilterOpen(false);
     }
   };
 
@@ -89,7 +83,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
             <input
               type="text"
               placeholder="Search Something..."
-              value={filters.searchQuery}
+              value={tempSearchQuery}
               name="searchQuery"
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
@@ -171,7 +165,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
             <input
               type="text"
               placeholder="Search Something..."
-              value={filters.searchQuery}
+              value={tempSearchQuery}
               name="searchQuery"
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}

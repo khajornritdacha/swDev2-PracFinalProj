@@ -1,4 +1,4 @@
-// Ensure getSearchedRestaurants is a valid async function that returns a Promise
+import axiosInstance from "./axios";
 
 export default async function getSearchedRestaurants({
   searchQuery = "",
@@ -26,30 +26,16 @@ export default async function getSearchedRestaurants({
 
   // Filter out empty or null parameters
   const filteredParams = Object.entries(Object.fromEntries(params.entries()))
-    .filter(([key, value]) => value !== "" && value !== null)
+    .filter(([_, value]) => value !== "" && value !== null)
     .reduce<{ [key: string]: string }>((acc, [key, value]) => {
       acc[key] = value;
       return acc;
     }, {});
 
-// Convert filtered params to query string
-const queryString = new URLSearchParams(filteredParams).toString();
+  // Convert filtered params to query string
+  const queryString = new URLSearchParams(filteredParams).toString();
 
-// Construct the full URL
-const apiUrl = `http://localhost:5001/api/v1/restaurants?${queryString}`;
-  console.log(apiUrl)
-  try {
-    const response = await fetch(apiUrl);
-    console.log(response)
-    if (!response.ok) {
-      const errorMessage = await response.text();
-      throw new Error(`Failed to fetch restaurants: ${response.statusText} - ${errorMessage}`);
-    }
-
-    const data = await response.json();
-    return data; // Assuming this returns the restaurant data, including pagination info
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw new Error("Failed to fetch restaurants");
-  }
+  // Construct the full URL
+  const res = await axiosInstance.get(`/restaurants?${queryString}`);
+  return res.data;
 }

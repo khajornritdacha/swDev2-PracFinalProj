@@ -20,10 +20,10 @@ export default function CreateReservationForm({
   const createMutation = useMutation({
     mutationFn: async () => {
       // TODO: handle error
-      //   TODO: toaster for success
       if (!session?.user.token) return;
       if (!bookingDate) return;
       const createdAt = new Date();
+      console.log("Create new reservation");
       const res = await createReservation(
         {
           numOfGuests,
@@ -33,12 +33,12 @@ export default function CreateReservationForm({
         session?.user.token,
         restaurant_id
       );
-      return res;
-    },
-    onSuccess: () => {
       setNumOfGuests(0);
       setBookingDate(null);
+      window.alert("Create Success!");
+      return res;
     },
+    onSuccess: () => {},
   });
 
   return (
@@ -50,6 +50,7 @@ export default function CreateReservationForm({
       setBookingDate={setBookingDate}
       handleOnSubmit={() => createMutation.mutate()}
       isAdmin={false}
+      isLoading={createMutation.isPending}
     />
   );
 }

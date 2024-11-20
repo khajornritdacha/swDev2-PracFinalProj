@@ -41,7 +41,7 @@ export default function RestaurantCreatePage() {
           <div className="h-auto text-[20px] font-extrabold text-[#999999]">
             Detail Page Example
           </div>
-          <RestaurantDetail restaurant={restaurant} />{" "}
+          <RestaurantDetail restaurant={restaurant} hideBookingButton={true} />{" "}
           {/* Pass restaurant data as prop */}
         </div>
       </div>

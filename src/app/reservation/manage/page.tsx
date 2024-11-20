@@ -6,7 +6,7 @@ export default async function ReservationPage() {
   const session = await getServerSession(authOptions);
   if (!session) return null;
   return (
-    <div className="flex items-center flex-col">
+    <div className="flex items-center flex-col gap-10 lg:gap-6">
       <h1 className="text-4xl sm:text-5xl font-bold text-center py-8 ">
         ประวัติการจอง
       </h1>

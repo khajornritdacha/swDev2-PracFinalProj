@@ -56,7 +56,7 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
 
   // Handle form submission and update restaurant data
   const handleFormSubmit = (newRestaurantData: RestaurantDto) => {
-    setRestaurant(newRestaurantData);
+    setRestaurant({ ...newRestaurantData, _id: rid });
   };
 
   return (
@@ -79,7 +79,7 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
           <div className="h-auto text-[20px] font-extrabold text-[#999999]">
             Detail Page
           </div>
-          <RestaurantDetail restaurant={restaurant} />{" "}
+          <RestaurantDetail restaurant={restaurant} hideBookingButton={true} />{" "}
           {/* Pass restaurant data as prop */}
         </div>
       </div>

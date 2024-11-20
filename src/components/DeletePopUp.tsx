@@ -6,7 +6,7 @@ interface DeletePopUpProps {
 }
 
 const DeletePopUp: React.FC<DeletePopUpProps> = ({ onClose, onConfirm }) => (
-  <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-100s">
+  <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-100">
     <div className="bg-white p-6 rounded shadow-md w-96 opacity-100 z-120">
       <h2 className="text-lg font-semibold text-center mb-4">
         Delete the restaurant

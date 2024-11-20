@@ -1,5 +1,4 @@
 export const sortOptions = [
-    'name',
     'province',
     'cuisine'
 ];

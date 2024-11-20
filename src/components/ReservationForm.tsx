@@ -27,6 +27,7 @@ export default function ReservationForm({
   isAdmin,
   isLoading,
 }: ReservationFormProps) {
+  const disabled = isLoading || !numOfGuests || !bookingDate;
   return (
     <div className="flex flex-col gap-6 w-auto py-10 px-10 shadow-md rounded-3xl h-min">
       <div className="flex justify-between gap-5">
@@ -74,8 +75,7 @@ export default function ReservationForm({
           />
         </LocalizationProvider>
       </div>
-      {/* TODO: disable this button on isloading or any forms not filled*/}
-      <StyledButton handleOnClick={() => handleOnSubmit()}>
+      <StyledButton handleOnClick={() => handleOnSubmit()} disabled={disabled}>
         ยืนยันการจอง
       </StyledButton>
     </div>

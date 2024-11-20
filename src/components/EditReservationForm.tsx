@@ -7,6 +7,7 @@ import dayjs, { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import ReservationForm from "./ReservationForm";
+import { AxiosError } from "axios";
 
 export default function EditReservationForm({
   reservationId,
@@ -21,7 +22,6 @@ export default function EditReservationForm({
   );
 
   const isAdmin = session?.user.role === "admin";
-  // TODO: handle loading
   const { isLoading } = useQuery({
     queryKey: ["reservation", "manage", reservationId],
     queryFn: async () => {
@@ -53,8 +53,14 @@ export default function EditReservationForm({
       return res;
     },
     onSuccess: () => {
-      // TODO: toast success
       window.alert("Edit reservation success!");
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        window.alert(error?.response?.data.message);
+        return;
+      }
+      console.error(error);
     },
   });
 

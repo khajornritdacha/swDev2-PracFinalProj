@@ -7,7 +7,7 @@ import SignoutButton from "./SignoutButton";
 import StyledButton from "./StyledButton";
 import Logo from "/public/logo/logo.png";
 import Image from "next/image";
-// TODO: change href
+
 export default function Navigation() {
   const { data: session } = useSession();
   const isLoggedIn = !!session?.user;

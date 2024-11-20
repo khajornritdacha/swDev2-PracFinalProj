@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import EditReservationForm from "@/components/EditReservationForm";
-import RestaurantDetail from "@/components/RestaurantDetail";
+import ReservationRestaurantDetail from "@/components/ReservationRestaurantDetail";
 import getRestaurant from "@/libs/getRestaurant";
 import { getOneReservation } from "@/libs/reservation.service";
 import { getServerSession } from "next-auth";
@@ -16,9 +16,12 @@ export default async function EditReservationPage({
   const restaurant = await getRestaurant(reservation.data.restaurant._id);
   // TODO: handle fetch data and update data and toast on success
   return (
-    <div className="flex flex-col sm:flex-row-reverse">
-      <EditReservationForm reservationId={params.id} />
-      <RestaurantDetail restaurant={restaurant.data} hideBookingButton={true} />
+    <div className="flex items-center py-10 px-[12%] gap-10 flex-col lg:py-0 lg:flex-row-reverse lg:h-[calc(100vh-80px)] lg:min-w-full lg:justify-around">
+      <div>
+        <h2 className="text-center font-bold text-3xl">รายละเอียดการจอง</h2>
+        <EditReservationForm reservationId={params.id} />
+      </div>
+      <ReservationRestaurantDetail restaurant={restaurant.data} />
     </div>
   );
 }

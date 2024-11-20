@@ -1,10 +1,10 @@
 "use client";
 
 import { FormControl, TextField } from "@mui/material";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 import StyledButton from "./StyledButton";
-import dayjs, { Dayjs } from "dayjs";
 
 interface ReservationFormProps {
   email: string;
@@ -26,9 +26,9 @@ export default function ReservationForm({
   isAdmin,
 }: ReservationFormProps) {
   return (
-    <FormControl className="flex flex-col gap-6 w-full">
-      <div className="flex justify-between">
-        <label className="block" htmlFor="email">
+    <FormControl className="flex flex-col gap-6 w-auto py-10 px-10 shadow-md rounded-3xl h-min">
+      <div className="flex justify-between gap-5">
+        <label className="block sm:min-w-max" htmlFor="email">
           {isAdmin ? "ไอดีผู้จอง" : "อีเมลผู้จอง"}
         </label>
         <TextField
@@ -41,11 +41,13 @@ export default function ReservationForm({
           value={email}
         />
       </div>
-      <div className="flex justify-between">
-        <label htmlFor="numOfGuests">จำนวนผู้จอง</label>
+      <div className="flex justify-between gap-5">
+        <label className="sm:min-w-max" htmlFor="numOfGuests">
+          จำนวนผู้จอง
+        </label>
         <TextField
           id="numOfGuests"
-          label="numOfGuests"
+          label="จำนวนผู้จอง"
           variant="outlined"
           placeholder="0"
           type="number"
@@ -57,10 +59,12 @@ export default function ReservationForm({
           }}
         />
       </div>
-      <div className="flex justify-between">
-        <label htmlFor="email">วันที่และเวลา</label>
+      <div className="flex justify-between gap-5">
+        <label className="sm:min-w-max" htmlFor="email">
+          วันที่และเวลา
+        </label>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+          <DateTimePicker
             value={bookingDate}
             onChange={(value) => setBookingDate(value)}
           />

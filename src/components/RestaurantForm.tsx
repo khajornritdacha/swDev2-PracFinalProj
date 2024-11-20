@@ -167,6 +167,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
       <div className="flex items-center mb-6 justify-center">
         <div className="w-[2/3]">
           <button
+            data-testid="submit-button"
             className="shadow bg-[#EC0808] hover:bg-red-400 px-8 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-[50px]"
             type="submit"
           >

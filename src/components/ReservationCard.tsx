@@ -64,8 +64,8 @@ export default function ReservationCard({
   const isAdmin = role === "admin";
 
   return (
-    <div className="flex flex-col flex-wrap  justify-center items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer sm:flex-row lg:w-max">
-      <div className="flex w-auto text-center md:text-left">
+    <div className="grid grid-rows-3 grid-cols-1 items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer lg:grid lg:grid-cols-12 lg:grid-rows-1">
+      <div className="row-span-1 flex w-auto justify-center text-center lg:text-left lg:col-span-4">
         <div className="flex-col">
           <h3 className="text-xl font-bold">{reservation.restaurant.name}</h3>
           <span
@@ -79,7 +79,7 @@ export default function ReservationCard({
           </span>
         </div>
       </div>
-      <div className="flex justify-between items-center px-3 gap-5 text-gray w-auto">
+      <div className="row-span-1 flex justify-between items-center px-3 gap-5 text-gray w-auto lg:col-span-4">
         <div className="flex justify-center items-center gap-2 min-w-max">
           <Image src={Calendar} alt="Calender" width={20} height={20} />
           <span className="">{dateTime.date}</span>
@@ -93,7 +93,7 @@ export default function ReservationCard({
           <span className="">{reservation.numOfGuests}</span>
         </div>
       </div>
-      <div className="flex items-center justify-around w-auto gap-6">
+      <div className="row-span-1 flex items-center justify-around w-auto gap-6 lg:col-span-4">
         <StyledButton variant="secondary">
           <Link href={`/reservation/manage/${reservation._id}`}>
             แก้ไขข้อมูล

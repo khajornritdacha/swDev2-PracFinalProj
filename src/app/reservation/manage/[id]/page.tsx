@@ -4,7 +4,6 @@ import ReservationRestaurantDetail from "@/components/ReservationRestaurantDetai
 import { RestaurantDto } from "@/interface";
 import getRestaurant from "@/libs/getRestaurant";
 import { getOneReservation } from "@/libs/reservation.service";
-import { LinearProgress } from "@mui/material";
 import { AxiosError } from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";

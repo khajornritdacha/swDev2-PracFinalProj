@@ -13,7 +13,8 @@ export default async function SignInPage() {
 
   return (
     <div
-      style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}
+      className="w-full h-[calc(100vh-80px)] flex items-center justify-center"
+      // style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}
     >
       <SignInForm csrfToken={""} />
     </div>

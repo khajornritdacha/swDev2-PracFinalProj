@@ -13,6 +13,7 @@ interface SelectQuestionProps {
 }
 
 const SelectQuestion: React.FC<SelectQuestionProps> = ({
+  label,
   id,
   options,
   selectedValue,
@@ -35,7 +36,7 @@ const SelectQuestion: React.FC<SelectQuestionProps> = ({
             className="object-contain"
           />
         </div>
-        {/* <span>{label}</span> */}
+        <span className="hidden">{label}</span>
       </label>
       <div className="relative">
         <select

@@ -1,42 +1,48 @@
 "use client";
 
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function SignInForm({ csrfToken }: { csrfToken: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
   const searchParams = useSearchParams();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      // TODO: add toaster to error
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["singup"],
+    mutationFn: async () => {
+      const callbackUrl =
+        searchParams?.get("callbackUrl") || "/reservation/manage";
       const res = await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
+        callbackUrl,
       });
 
       if (!res?.ok) {
         setError(res?.error || "เข้าสู่ระบบไม่สำเร็จ");
       }
+    },
+  });
 
-      const callbackUrl =
-        searchParams?.get("callbackUrl") || "/reservation/manage";
-      router.push(callbackUrl);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setError("");
+      if (isPending) return;
+      mutate();
     } catch {
       setError("เข้าสู่ระบบไม่สำเร็จ");
     }
   };
 
   return (
-    <Box className="flex justify-center items-center h-screen bg-gray-100">
+    <Box className="flex justify-center items-center bg-gray-100">
       <Box
         className="p-8 rounded-lg shadow-lg bg-white"
         style={{ maxWidth: "400px", textAlign: "center", borderRadius: "16px" }}
@@ -113,7 +119,7 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
             type="submit"
             fullWidth
             variant="contained"
-            className="mt-4"
+            className="mt-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray"
             style={{
               backgroundColor: "#D32F2F",
               color: "white",
@@ -126,6 +132,7 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
                 backgroundColor: "#B71C1C",
               },
             }}
+            disabled={isPending}
           >
             เข้าสู่ระบบ
           </Button>

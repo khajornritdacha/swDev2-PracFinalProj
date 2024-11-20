@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import PinIcon from "../../public/logo/pin.svg";
-import RestaurantIcon from "../../public/logo/restaurant.svg";
+import PinIcon from "@/../public/logo/pin.svg";
+import RestaurantIcon from "@/../public/logo/restaurant.svg";
 
 type RestaurantProps = {
   restaurant: {
@@ -34,13 +34,13 @@ const RestaurantDetail = ({
         {/* Details Bar and Page Breakout */}
         <div className="w-[80%] h-auto mx-10 py-1 border-b-2 border-[#999999] mb-4 border-opacity-30 flex items-center justify-center gap-10">
           <div className="h-auto flex items-center justify-center gap-1">
-            <div className="w-[14px] h-[14px] relative">
-              <Image
-                src={RestaurantIcon}
-                alt="Restaurant Icon"
-                fill={true}
-                className="object-contain"
-              />
+            <div className="w-[14px] h-[14px] flex">
+            <img
+              src="/logo/restaurant.svg"
+              alt="restaurant icon"
+              className="w-full h-full object-contain"
+            />
+
             </div>
             <p className="text-[16px] font-regular text-[#999999]">
               {restaurant.foodtype}
@@ -48,13 +48,18 @@ const RestaurantDetail = ({
           </div>
 
           <div className="h-auto flex items-center justify-center gap-1">
-            <div className="w-[14px] h-[14px] relative">
-              <Image
+            <div className="w-[14px] h-[14px] flex">
+              {/* <Image
                 src={PinIcon}
                 alt="Pin Icon"
                 fill={true}
                 className="object-contain"
-              />
+              /> */}
+              <img
+              src="/logo/pin.svg"
+              alt="restaurant pic"
+              className="w-full h-full object-contain"
+            />
             </div>
             <p className="text-[16px] font-regular text-[#999999]">
               {restaurant.province}
@@ -122,7 +127,7 @@ const RestaurantDetail = ({
 
             <Link
               href={`/reservation/create/${restaurant._id}`}
-              className="w-[50%] h-[60px] bg-[#EC0808] rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center"
+              className="w-[50%] h-[60px] bg-[#EC0808] text-center rounded-[24px] text-[24px] text-white font-extrabold flex justify-center items-center"
             >
               BOOK NOW
             </Link>

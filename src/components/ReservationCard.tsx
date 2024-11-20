@@ -64,7 +64,7 @@ export default function ReservationCard({
   const isAdmin = role === "admin";
 
   return (
-    <div className="grid grid-rows-3 grid-cols-1 items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer lg:grid lg:grid-cols-12 lg:grid-rows-1">
+    <div className="grid grid-rows-3 grid-cols-1 items-center gap-4 px-4 py-4 w-[80%] rounded-2xl shadow-md hover:bg-slate-100 transition-colors hover:cursor-pointer lg:grid-cols-12 lg:grid-rows-1">
       <div className="row-span-1 flex w-auto justify-center text-center lg:text-left lg:col-span-4">
         <div className="flex-col">
           <h3 className="text-xl font-bold">{reservation.restaurant.name}</h3>

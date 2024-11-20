@@ -1,7 +1,9 @@
 "use client";
 
+import userLogIn from "@/libs/userLogIn";
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -14,6 +16,19 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
   const { mutate, isPending } = useMutation({
     mutationKey: ["singup"],
     mutationFn: async () => {
+      try {
+        await userLogIn(email, password);
+      } catch (err) {
+        console.error(err);
+        if (!(err instanceof AxiosError)) return;
+        if (err.status == 401) {
+          setError("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+        } else {
+          setError("เข้าสู่ระบบไม่สำเร็จ กรุณาลองอีกครั้งในภายหลัง");
+        }
+        return;
+      }
+
       const callbackUrl =
         searchParams?.get("callbackUrl") || "/reservation/manage";
       const res = await signIn("credentials", {

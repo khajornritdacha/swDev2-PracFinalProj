@@ -146,7 +146,7 @@ const SearchBarWithFilters: React.FC<SearchBarWithFiltersProps> = ({
               onChange={handleSelectChange}
               className="w-full px-4 py-2 rounded-md border-2 border-red-500"
             >
-              <option value="">Sort by Name</option>
+              <option key="name" value="name">name</option>
               {sortOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}

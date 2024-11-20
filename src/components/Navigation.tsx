@@ -5,7 +5,8 @@ import Link from "next/link";
 import Hamburger from "./Hamburger";
 import SignoutButton from "./SignoutButton";
 import StyledButton from "./StyledButton";
-
+import Logo from "/public/logo/logo.png";
+import Image from "next/image";
 // TODO: change href
 export default function Navigation() {
   const { data: session } = useSession();
@@ -13,9 +14,11 @@ export default function Navigation() {
 
   return (
     <>
-      <div className="flex justify-between w-full items-center px-8 py-3 shadow-md font-medium sm:px-20">
+      <div className="h-[80px] flex justify-between w-full items-center px-8 py-3 shadow-md font-medium sm:px-20">
         <div className="flex items-center">
-          <Link href="/reservation/manage">ร้านอาหารทั้งหมด</Link>
+          <Link href="/restaurant">
+            <Image src={Logo} alt="web logo" width={65} height={65} priority />
+          </Link>
         </div>
         <Hamburger isLoggedIn={isLoggedIn} />
         <div className="hidden sm:inline-block">

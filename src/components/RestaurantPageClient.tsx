@@ -58,7 +58,7 @@ const RestaurantPageClient = () => {
       <SearchBarWithFilters
         filters={filters}
         onFilterChange={handleFilterChange}
-        resultsCount={restaurantsJson?.data?.length || 0}
+        resultsCount={restaurantsJson?.count || 0}
       />
 
       {loading ? (

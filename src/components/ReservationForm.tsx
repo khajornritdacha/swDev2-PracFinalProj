@@ -1,6 +1,6 @@
 "use client";
 
-import { FormControl, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -26,7 +26,7 @@ export default function ReservationForm({
   isAdmin,
 }: ReservationFormProps) {
   return (
-    <FormControl className="flex flex-col gap-6 w-auto py-10 px-10 shadow-md rounded-3xl h-min">
+    <div className="flex flex-col gap-6 w-auto py-10 px-10 shadow-md rounded-3xl h-min">
       <div className="flex justify-between gap-5">
         <label className="block sm:min-w-max" htmlFor="email">
           {isAdmin ? "ไอดีผู้จอง" : "อีเมลผู้จอง"}
@@ -73,6 +73,6 @@ export default function ReservationForm({
       <StyledButton handleOnClick={() => handleOnSubmit()}>
         ยืนยันการจอง
       </StyledButton>
-    </FormControl>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  important: true,
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,7 +20,7 @@ const config: Config = {
         gray: "var(--gray)",
       },
       boxShadow: {
-        'custom-md': `
+        "custom-md": `
           var(--tw-ring-offset-shadow, 0 0 #0000),
           var(--tw-ring-shadow, 0 0 #0000),
           0 0px 6px -1px rgb(0 0 0 / 0.1), 

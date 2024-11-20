@@ -17,14 +17,32 @@ export default function RegisterForm() {
     mutationKey: ["register"],
     mutationFn: async () => {
       try {
+        if (!name || !tel || !email || !password) {
+          throw new Error("กรุณากรอกข้อมูลให้ครบถ้วน");
+        }
+        if (password.length < 8) {
+          throw new Error("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร");
+        }
+        if (tel.length !== 10) {
+          throw new Error("เบอร์โทรต้องมีความยาว 10 ตัว");
+        }
+        if (!email.includes("@")) {
+          throw new Error("รูปแบบอีเมลไม่ถูกต้อง");
+        }
+
         await userRegister(name, tel, email, password);
         setName("");
         setTel("");
         setEmail("");
         setPassword("");
+        setError("");
         window.alert("Register successfully!");
-      } catch {
-        setError("ลงทะเบียนไม่สำเร็จ");
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("ลงทะเบียนไม่สำเร็จ");
+        }
       }
     },
   });

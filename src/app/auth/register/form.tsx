@@ -3,6 +3,7 @@
 import userRegister from "@/libs/userRegister";
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 // TODO: handle form validation
 export default function RegisterForm() {
@@ -12,19 +13,25 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: async () => {
+      try {
+        await userRegister(name, tel, email, password);
+        setName("");
+        setTel("");
+        setEmail("");
+        setPassword("");
+        window.alert("Register successfully!");
+      } catch {
+        setError("ลงทะเบียนไม่สำเร็จ");
+      }
+    },
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      await userRegister(name, tel, email, password);
-      //   TODO: add toaster for successfuly register
-      setName("");
-      setTel("");
-      setEmail("");
-      setPassword("");
-    } catch {
-      setError("ลงทะเบียนไม่สำเร็จ");
-    }
+    mutate();
   };
 
   return (
@@ -145,7 +152,7 @@ export default function RegisterForm() {
             type="submit"
             fullWidth
             variant="contained"
-            className="mt-4"
+            className="mt-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray"
             style={{
               backgroundColor: "#D32F2F",
               color: "white",
@@ -158,6 +165,7 @@ export default function RegisterForm() {
                 backgroundColor: "#B71C1C",
               },
             }}
+            disabled={isPending}
           >
             ลงทะเบียน
           </Button>

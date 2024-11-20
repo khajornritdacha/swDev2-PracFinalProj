@@ -14,6 +14,7 @@ interface ReservationFormProps {
   setBookingDate: (bookingDate: dayjs.Dayjs | null) => void;
   handleOnSubmit: () => void;
   isAdmin: boolean;
+  isLoading: boolean;
 }
 
 export default function ReservationForm({
@@ -24,6 +25,7 @@ export default function ReservationForm({
   setBookingDate,
   handleOnSubmit,
   isAdmin,
+  isLoading,
 }: ReservationFormProps) {
   return (
     <div className="flex flex-col gap-6 w-auto py-10 px-10 shadow-md rounded-3xl h-min">
@@ -57,6 +59,7 @@ export default function ReservationForm({
             if (num < 0) return;
             setNumOfGuests(num);
           }}
+          disabled={isLoading}
         />
       </div>
       <div className="flex justify-between gap-5">
@@ -67,9 +70,11 @@ export default function ReservationForm({
           <DateTimePicker
             value={bookingDate}
             onChange={(value) => setBookingDate(value)}
+            disabled={isLoading}
           />
         </LocalizationProvider>
       </div>
+      {/* TODO: disable this button on isloading or any forms not filled*/}
       <StyledButton handleOnClick={() => handleOnSubmit()}>
         ยืนยันการจอง
       </StyledButton>

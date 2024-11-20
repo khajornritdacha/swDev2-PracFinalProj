@@ -2,6 +2,7 @@ import Image from "next/image";
 import PinIcon from "/public/logo/pin.svg";
 import RestaurantIcon from "/public/logo/restaurant.svg";
 import { RestaurantDto } from "@/interface";
+import { Skeleton } from "@mui/material";
 
 export default function ReservationRestaurantDetail({
   restaurant,
@@ -50,13 +51,17 @@ export default function ReservationRestaurantDetail({
         </div>
 
         <div className="w-full relative max-w-[540px] min-w-[300px] aspect-[534/330] bg-gray-200 rounded-3xl overflow-hidden shadow-lg">
-          <Image
-            src={restaurant.picture}
-            alt="restaurnt picture"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-xl"
-          />
+          {!restaurant.picture ? (
+            <Skeleton variant="rectangular" width="100%" height="100%" />
+          ) : (
+            <Image
+              src={restaurant.picture}
+              alt="restaurnt picture"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-xl"
+            />
+          )}
         </div>
 
         <div className="pt-8 text-center">

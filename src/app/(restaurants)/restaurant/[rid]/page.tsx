@@ -1,6 +1,7 @@
 import AdminBar from "@/components/AdminBar";
 import RestaurantDetail from "@/components/RestaurantDetail"; // Import the new component
 import getRestaurant from "@/libs/getRestaurant";
+import { AxiosError } from "axios";
 
 export default async function RestaurantDetailPage({
   params,
@@ -8,10 +9,20 @@ export default async function RestaurantDetailPage({
   params: { rid: string };
 }) {
   // Fetch the restaurant data
-  const RestaurantDetailData = await getRestaurant(params.rid);
+  let restaurant = null;
+  try {
+    const RestaurantDetailData = await getRestaurant(params.rid);
+    restaurant = RestaurantDetailData?.data;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      if (err.response?.status === 404) {
+        return <div>Restaurant not found!</div>;
+      }
+    }
+    console.error(err);
+  }
 
   // If RestaurantDetail is null or undefined, show error or fallback
-  const restaurant = RestaurantDetailData?.data;
 
   if (!restaurant) {
     return <div>Restaurant not found!</div>;

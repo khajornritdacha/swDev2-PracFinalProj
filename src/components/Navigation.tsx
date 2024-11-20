@@ -21,7 +21,7 @@ export default function Navigation() {
           </Link>
         </div>
         <Hamburger isLoggedIn={isLoggedIn} />
-        <div className="hidden sm:inline-block">
+        <div className="hidden md:inline-block">
           <ul className="flex justify-between items-center gap-14">
             <li>
               <Link href="/restaurant">ร้านอาหารทั้งหมด</Link>

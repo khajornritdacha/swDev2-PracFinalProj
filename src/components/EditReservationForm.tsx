@@ -1,12 +1,12 @@
 "use client";
 
+import { GetReservationDto } from "@/interface";
 import { editReservation, getOneReservation } from "@/libs/reservation.service";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import dayjs, { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import ReservationForm from "./ReservationForm";
-import { GetReservationDto } from "@/interface";
 
 export default function EditReservationForm({
   reservationId,
@@ -22,7 +22,7 @@ export default function EditReservationForm({
 
   const isAdmin = session?.user.role === "admin";
   // TODO: handle loading
-  const {} = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["reservation", "manage", reservationId],
     queryFn: async () => {
       if (!session?.user.token) return;
@@ -54,6 +54,7 @@ export default function EditReservationForm({
     },
     onSuccess: () => {
       // TODO: toast success
+      window.alert("Edit reservation success!");
     },
   });
 
@@ -68,6 +69,7 @@ export default function EditReservationForm({
       setBookingDate={setBookingDate}
       handleOnSubmit={() => editMutation.mutate()}
       isAdmin={isAdmin}
+      isLoading={isLoading || editMutation.isPending}
     />
   );
 }

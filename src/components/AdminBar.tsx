@@ -8,6 +8,7 @@ import createIcon from "../../public/logo/Create.svg";
 import deleteIcon from "../../public/logo/Delete.svg";
 import editIcon from "../../public/logo/Edit.svg";
 import DeletePopUp from "../components/DeletePopUp";
+import { useRouter } from "next/navigation";
 
 // Props type for admin status and restaurant ID
 interface AdminBarProps {
@@ -17,7 +18,7 @@ interface AdminBarProps {
 const AdminBar: React.FC<AdminBarProps> = ({ rid }) => {
   const { data: session } = useSession();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-
+  const router = useRouter();
   if (!session || !session.user.role) return null; // Hide the component if the user is not an admin
 
   const handleDelete = async () => {
@@ -36,6 +37,7 @@ const AdminBar: React.FC<AdminBarProps> = ({ rid }) => {
         if (res.status === 200) {
           alert("Restaurant deleted successfully.");
           setShowDeletePopup(false);
+          router.push("/restaurant");
         }
       }
     } catch (error) {

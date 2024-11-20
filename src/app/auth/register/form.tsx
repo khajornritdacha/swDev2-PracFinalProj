@@ -5,6 +5,26 @@ import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
+const validateForm = (
+  name: string,
+  tel: string,
+  email: string,
+  password: string
+) => {
+  if (!name || !tel || !email || !password) {
+    throw new Error("testing");
+  }
+  if (password.length < 8) {
+    throw new Error("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร");
+  }
+  if (tel.length !== 10) {
+    throw new Error("เบอร์โทรต้องมีความยาว 10 ตัว");
+  }
+  if (!email.includes("@")) {
+    throw new Error("รูปแบบอีเมลไม่ถูกต้อง");
+  }
+};
+
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
@@ -16,18 +36,7 @@ export default function RegisterForm() {
     mutationKey: ["register"],
     mutationFn: async () => {
       try {
-        if (!name || !tel || !email || !password) {
-          throw new Error("กรุณากรอกข้อมูลให้ครบถ้วน");
-        }
-        if (password.length < 8) {
-          throw new Error("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร");
-        }
-        if (tel.length !== 10) {
-          throw new Error("เบอร์โทรต้องมีความยาว 10 ตัว");
-        }
-        if (!email.includes("@")) {
-          throw new Error("รูปแบบอีเมลไม่ถูกต้อง");
-        }
+        validateForm(name, tel, email, password);
 
         await userRegister(name, tel, email, password);
         setName("");
@@ -154,21 +163,23 @@ export default function RegisterForm() {
           </Box>
 
           {/* Error Message */}
-          {error && (
-            <Typography
-              color="error"
-              className="mt-2 text-sm"
-              style={{ color: "#D32F2F" }}
-            >
-              {error}
-            </Typography>
-          )}
+          <Typography
+            color="error"
+            className="mt-2 text-sm"
+            style={{ color: "#D32F2F" }}
+            data-testid="error-msg"
+          >
+            {error}
+          </Typography>
 
           {/* Submit Button */}
           <Button
             type="submit"
             fullWidth
             variant="contained"
+            name="register-button"
+            id="register-button"
+            data-testid="register-button"
             className="mt-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray"
             style={{
               backgroundColor: "#D32F2F",

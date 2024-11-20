@@ -12,7 +12,7 @@ import axiosInstance from "@/libs/axios";
 import { RestaurantDto } from "@/interface";
 
 interface RestaurantFormProps {
-  onSubmit: (restaurantData: any) => void;
+  onSubmit: (restaurantData: Omit<RestaurantDto, "_id">) => void;
   initialData?: RestaurantDto; // For edit mode
   token: string;
   rid?: string;
@@ -65,7 +65,7 @@ const RestaurantForm: React.FC<RestaurantFormProps> = ({
       const method = initialData ? "PUT" : "POST"; // Use PUT for editing, POST for creating
       const url =
         method === "PUT" && rid ? `restaurants/${rid}` : `restaurants`;
-      const res = await axiosInstance.request({
+      await axiosInstance.request({
         url: url,
         method: method,
         headers: {

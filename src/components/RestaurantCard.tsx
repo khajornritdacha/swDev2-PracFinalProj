@@ -1,6 +1,6 @@
-import { RestaurantItem } from "../../interface";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { RestaurantItem } from "../../interface";
 import MapIcon from "../../public/logo/map.svg";
 
 interface CardProps {
@@ -17,7 +17,7 @@ const isValidUrl = (url: string): boolean => {
 };
 
 const RestaurantCard = ({ restaurant }: CardProps) => {
-  const { _id, name, picture, address, foodtype, province, tel } = restaurant;
+  const { _id, name, picture, foodtype, province } = restaurant;
 
   const isValidPicture = isValidUrl(picture);
 

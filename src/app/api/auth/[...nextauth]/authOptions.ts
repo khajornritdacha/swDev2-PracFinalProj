@@ -1,5 +1,6 @@
 import getUserProfile from "@/libs/getUserProfile";
 import userLogIn from "@/libs/userLogIn";
+import { Role } from "@/next-auth";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions: AuthOptions = {
@@ -15,7 +16,7 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "email", placeholder: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
         if (!credentials) return null;
 
@@ -41,8 +42,15 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
-    async session({ session, token, user }) {
-      session.user = token as any;
+    async session({ session, token }) {
+      session.user = token as {
+        _id: string;
+        name: string;
+        email: string;
+        image: string;
+        token: string;
+        role: Role;
+      };
       return session;
     },
   },

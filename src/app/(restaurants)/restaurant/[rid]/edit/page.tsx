@@ -40,7 +40,7 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
         } else {
           setError("Restaurant not found!"); // Handle case when no restaurant data is found
         }
-      } catch (err) {
+      } catch {
         setError("Error fetching restaurant data"); // Handle error during fetch
       } finally {
         setLoading(false);

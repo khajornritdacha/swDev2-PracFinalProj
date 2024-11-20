@@ -1,11 +1,11 @@
 "use client"; // Indicating this is a Client Component
 
-import React, { useState, useEffect } from "react";
-import SearchBarWithFilters from "@/components/SearchBarWithFilters";
 import RestaurantList from "@/components/RestaurantList";
+import SearchBarWithFilters from "@/components/SearchBarWithFilters";
 import getSearchedRestaurants from "@/libs/getSearchedRestaurants";
-import { RestaurantJson, RestaurantItem } from "../../interface";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { RestaurantJson } from "../../interface";
 const RestaurantPageClient = () => {
   const [restaurantsJson, setRestaurantsJson] = useState<RestaurantJson | null>(
     null
@@ -54,13 +54,12 @@ const RestaurantPageClient = () => {
         <Image
           src="/logo/nameLogo.png"
           alt="CP FOODIE"
-          width={300} 
-          height={300} 
+          width={300}
+          height={300}
           className="object-contain"
-          priority 
+          priority
         />
       </div>
-
 
       {/* Pass the result count to SearchBarWithFilters */}
       <SearchBarWithFilters

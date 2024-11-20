@@ -26,7 +26,7 @@ export default async function getSearchedRestaurants({
 
   // Filter out empty or null parameters
   const filteredParams = Object.entries(Object.fromEntries(params.entries()))
-    .filter(([_, value]) => value !== "" && value !== null)
+    .filter(([, value]) => value !== "" && value !== null)
     .reduce<{ [key: string]: string }>((acc, [key, value]) => {
       acc[key] = value;
       return acc;

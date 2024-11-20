@@ -16,13 +16,13 @@ export default function RegisterForm() {
     e.preventDefault();
 
     try {
-      const res = await userRegister(name, tel, email, password);
+      await userRegister(name, tel, email, password);
       //   TODO: add toaster for successfuly register
       setName("");
       setTel("");
       setEmail("");
       setPassword("");
-    } catch (err) {
+    } catch {
       setError("ลงทะเบียนไม่สำเร็จ");
     }
   };

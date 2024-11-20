@@ -17,20 +17,10 @@ type RestaurantProps = {
   hideBookingButton?: boolean;
 };
 
-const isValidUrl = (url: string): boolean => {
-  try {
-    new URL(url); // Throws an error if the URL is invalid
-    return true;
-  } catch {
-    return false;
-  }
-};
-
 const RestaurantDetail = ({
   restaurant,
   hideBookingButton,
 }: RestaurantProps) => {
-  const isValidPicture = isValidUrl(restaurant.picture);
   return (
     <>
       <div className="h-full w-full flex flex-col justify-center items-center gap-4">
@@ -75,10 +65,16 @@ const RestaurantDetail = ({
         {/* Wrap Picture and Details Box */}
         <div className="w-full flex flex-wrap gap-8 px-[5%] justify-center">
           <div className="w-full max-w-[540px] min-w-[300px] aspect-[534/330] bg-gray-200 rounded-[50px] overflow-hidden shadow-lg">
-            <img
+            {/* <img
               src={restaurant.picture}
               alt="restaurant pic"
               className="w-full h-full object-cover"
+            /> */}
+            <Image
+              src={restaurant.picture}
+              alt="restaurant pic"
+              layout="fill"
+              objectFit="cover"
             />
           </div>
 

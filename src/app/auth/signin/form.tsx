@@ -30,7 +30,7 @@ export default function SignInForm({ csrfToken }: { csrfToken: string }) {
       const callbackUrl =
         searchParams?.get("callbackUrl") || "/reservation/manage";
       router.push(callbackUrl);
-    } catch (err) {
+    } catch {
       setError("เข้าสู่ระบบไม่สำเร็จ");
     }
   };

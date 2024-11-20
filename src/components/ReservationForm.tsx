@@ -74,7 +74,7 @@ export default function ReservationForm({
           />
         </LocalizationProvider>
       </div>
-      {/* TODO: disable this button */}
+      {/* TODO: disable this button on isloading or any forms not filled*/}
       <StyledButton handleOnClick={() => handleOnSubmit()}>
         ยืนยันการจอง
       </StyledButton>

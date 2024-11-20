@@ -52,6 +52,4 @@ export default function CreateReservationForm({
       isAdmin={false}
     />
   );
-
-  //   print("Hello Jo Jo, I am mind eieiei ");
 }

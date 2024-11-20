@@ -26,9 +26,9 @@ export default async function RootLayout({
 }>) {
   const nextAuthSession = await getServerSession(authOptions);
 
-  if (!nextAuthSession) {
-    return null;
-  }
+  // if (!nextAuthSession) {
+  //   return null;
+  // }
 
   return (
     <html lang="en">

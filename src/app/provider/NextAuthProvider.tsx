@@ -9,7 +9,7 @@ export default function NextAuthProvider({
   session,
 }: {
   children: React.ReactNode;
-  session: Session;
+  session: Session | null;
 }): React.ReactNode {
   return <SessionProvider session={session}>{children}</SessionProvider>;
 }

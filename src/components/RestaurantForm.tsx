@@ -12,7 +12,7 @@ import axiosInstance from "@/libs/axios";
 import { RestaurantDto } from "@/interface";
 
 interface RestaurantFormProps {
-  onSubmit: (restaurantData: Omit<RestaurantDto, "_id">) => void;
+  onSubmit: (restaurantData: any) => void;
   initialData?: RestaurantDto; // For edit mode
   token: string;
   rid?: string;

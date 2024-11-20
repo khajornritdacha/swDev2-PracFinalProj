@@ -64,7 +64,7 @@ const RestaurantDetail = ({
 
         {/* Wrap Picture and Details Box */}
         <div className="w-full flex flex-wrap gap-8 px-[5%] justify-center">
-          <div className="w-full max-w-[540px] min-w-[300px] aspect-[534/330] bg-gray-200 rounded-[50px] overflow-hidden shadow-lg">
+          <div className="relative w-full max-w-[540px] min-w-[300px] aspect-[534/330] bg-gray-200 rounded-[50px] overflow-hidden shadow-lg">
             {/* <img
               src={restaurant.picture}
               alt="restaurant pic"

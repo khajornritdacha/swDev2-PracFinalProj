@@ -1,6 +1,7 @@
 "use client";
 import RestaurantDetail from "@/components/RestaurantDetail";
 import RestaurantForm from "@/components/RestaurantForm";
+import { RestaurantDto } from "@/interface";
 import getRestaurant from "@/libs/getRestaurant";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
   const rid = params.rid; // Get the restaurant ID from dynamic routing
   const session = useSession();
 
-  const [restaurant, setRestaurant] = useState({
+  const [restaurant, setRestaurant] = useState<RestaurantDto>({
     _id: "",
     name: "",
     foodtype: "",
@@ -54,7 +55,7 @@ const RestaurantEditPage = ({ params }: { params: { rid: string } }) => {
   if (error) return <div>{error}</div>;
 
   // Handle form submission and update restaurant data
-  const handleFormSubmit = (newRestaurantData: typeof restaurant) => {
+  const handleFormSubmit = (newRestaurantData: RestaurantDto) => {
     setRestaurant(newRestaurantData);
   };
 

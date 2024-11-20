@@ -26,6 +26,10 @@ export default async function RootLayout({
 }>) {
   const nextAuthSession = await getServerSession(authOptions);
 
+  if (!nextAuthSession) {
+    return null;
+  }
+
   return (
     <html lang="en">
       <body className={`${prompt.variable} antialiased `}>

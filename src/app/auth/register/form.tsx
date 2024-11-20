@@ -5,7 +5,6 @@ import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 
-// TODO: handle form validation
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");

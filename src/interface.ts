@@ -1,4 +1,3 @@
-// TODO: restaurant is not string but a restuant object without image url
 export interface DeleteResponse {
   success: boolean;
 }

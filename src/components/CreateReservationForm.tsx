@@ -6,6 +6,7 @@ import ReservationForm from "./ReservationForm";
 import { useSession } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
 import { createReservation } from "@/libs/reservation.service";
+import { AxiosError } from "axios";
 
 export default function CreateReservationForm({
   restaurant_id,
@@ -19,11 +20,9 @@ export default function CreateReservationForm({
 
   const createMutation = useMutation({
     mutationFn: async () => {
-      // TODO: handle error
       if (!session?.user.token) return;
       if (!bookingDate) return;
       const createdAt = new Date();
-      console.log("Create new reservation");
       const res = await createReservation(
         {
           numOfGuests,
@@ -38,7 +37,14 @@ export default function CreateReservationForm({
       window.alert("Create Success!");
       return res;
     },
-    onSuccess: () => {},
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        window.alert(error?.response?.data.message);
+        return;
+      }
+      console.error(error);
+      window.alert(error.message);
+    },
   });
 
   return (

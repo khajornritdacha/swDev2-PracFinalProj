@@ -45,7 +45,6 @@ export default function EditReservationPage({
     fetchReservation();
   }, [session, params.id]);
 
-  // TODO: handle fetch data and update data and toast on success
   return (
     <div className="flex items-center py-10 px-[12%] gap-10 flex-col lg:py-0 lg:flex-row-reverse lg:h-[calc(100vh-80px)] lg:min-w-full lg:justify-around">
       <div>

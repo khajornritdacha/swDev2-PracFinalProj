@@ -54,12 +54,10 @@ export default function ReservationCard({
       return res;
     },
     onSuccess: () => {
-      // TODO: add toaster
+      window.alert("Delete reservation success!");
       refetch();
     },
   });
-
-  // TODO: open modal and confirm delete with react query mutate
 
   const isAdmin = role === "admin";
 

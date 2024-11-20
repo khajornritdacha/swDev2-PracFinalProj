@@ -31,13 +31,20 @@ describe("RestaurantForm", () => {
 
   test("validates phone number and postal code", () => {
     render(<RestaurantForm onSubmit={mockOnSubmit} token={mockToken} />);
-
+    fireEvent.change(screen.getByLabelText(/Postal Code/i), {
+      target: { value: "12345" },
+    });
     // Invalid phone number
     fireEvent.change(screen.getByLabelText(/Phone Number/i), {
       target: { value: "123" },
     });
     fireEvent.blur(screen.getByLabelText(/Phone Number/i));
     expect(screen.getByLabelText(/Phone Number/i)).toHaveValue("123");
+    expect(screen.getByText(/Invalid input/i)).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText(/Phone Number/i), {
+      target: { value: "0000000000" },
+    });
 
     // Invalid postal code
     fireEvent.change(screen.getByLabelText(/Postal Code/i), {
@@ -45,6 +52,7 @@ describe("RestaurantForm", () => {
     });
     fireEvent.blur(screen.getByLabelText(/Postal Code/i));
     expect(screen.getByLabelText(/Postal Code/i)).toHaveValue("1234");
+    expect(screen.getByText(/Invalid input/i)).toBeInTheDocument();
   });
 
   test("pre-fills form with initial data for edit mode", () => {

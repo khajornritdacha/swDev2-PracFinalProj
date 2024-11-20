@@ -5,7 +5,7 @@ import SearchBarWithFilters from "@/components/SearchBarWithFilters";
 import RestaurantList from "@/components/RestaurantList";
 import getSearchedRestaurants from "@/libs/getSearchedRestaurants";
 import { RestaurantJson, RestaurantItem } from "../../interface";
-
+import Image from "next/image";
 const RestaurantPageClient = () => {
   const [restaurantsJson, setRestaurantsJson] = useState<RestaurantJson | null>(
     null
@@ -50,9 +50,17 @@ const RestaurantPageClient = () => {
 
   return (
     <main className="p-5">
-      <h1 className="text-xl font-medium text-center mb-6">
-        Red Gourmet Kitchen
-      </h1>
+      <div className="flex relative w-full h-auto justify-center items-center pb-3">
+        <Image
+          src="/logo/nameLogo.png"
+          alt="CP FOODIE"
+          width={300} 
+          height={300} 
+          className="object-contain"
+          priority 
+        />
+      </div>
+
 
       {/* Pass the result count to SearchBarWithFilters */}
       <SearchBarWithFilters
